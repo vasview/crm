@@ -25,20 +25,20 @@ ActiveRecord::Schema.define(version: 20170815195944) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "committee_representatives", force: :cascade do |t|
+    t.integer "committee_id"
+    t.integer "representative_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["committee_id"], name: "index_committee_representatives_on_committee_id"
+    t.index ["representative_id"], name: "index_committee_representatives_on_representative_id"
+  end
+
   create_table "committees", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "committees_representatives", force: :cascade do |t|
-    t.integer "committee_id"
-    t.integer "representative_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["committee_id"], name: "index_committees_representatives_on_committee_id"
-    t.index ["representative_id"], name: "index_committees_representatives_on_representative_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(version: 20170815195944) do
     t.index ["industry_id"], name: "index_companies_on_industry_id"
   end
 
-  create_table "companies_headers", force: :cascade do |t|
+  create_table "executives", force: :cascade do |t|
     t.integer "company_id"
     t.integer "representative_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_companies_headers_on_company_id"
-    t.index ["representative_id"], name: "index_companies_headers_on_representative_id"
+    t.index ["company_id"], name: "index_executives_on_company_id"
+    t.index ["representative_id"], name: "index_executives_on_representative_id"
   end
 
   create_table "industries", force: :cascade do |t|
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20170815195944) do
     t.integer "job_position_id"
     t.date "birthdate"
     t.text "notes"
-    t.boolean "company_header"
+    t.boolean "company_head"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_representatives_on_company_id"

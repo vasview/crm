@@ -11,7 +11,7 @@ class CreateRepresentatives < ActiveRecord::Migration[5.1]
       t.references :job_position, foreign_key: true
       t.date :birthdate
       t.text :notes
-      t.boolean :company_header
+      t.boolean :company_head
 
       t.timestamps
     end
