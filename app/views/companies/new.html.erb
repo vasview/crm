@@ -1,0 +1,38 @@
+<%= form_for @company, class: 'company-form' do |f| %>
+  <h2>Создать компанию:</h2>
+  <p>
+    <%= f.label :name, 'Название' %> <%= f.text_field :name %>
+  </p>
+  <p>
+    <label for="company_city">Город:</label><%= collection_select(:company, :city_id, City.all, :id, :name, promp: true) %>
+  </p>
+  <p>
+    <label for="company_address">Адрес:</label> <%= f.text_field :address %>
+  </p>
+
+  <%= f.label "Руководитель: " %> <%= f.fields_for @executives do |executive_form| %>
+    <p>
+      ФИО: <%= executive_form.collection_select(:representative_id, Representative.all, :id, :fullname, promp: true) %>
+    </p>
+  <% end %>
+  collection_select(:representative, :repsentative_id, Representative.all, :id, :firstname)
+  <p>
+    <label for="company_work_phone">Рабочий телефон:</label> <%= f.text_field :work_phone, {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="company_mobile_phone">Мобильный телефон:</label> <%= f.text_field :mobile_phone , {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="company_email">Email:</label> <%= f.text_field :email, {type: 'email'} %>
+  </p>
+  <p>
+    <label for="company_industry">Сфера деятельности:</label><%= collection_select(:company, :industry_id, Industry.all, :id, :title, promp: true) %>
+  </p>
+  <p>
+    <%= f.label :birthdate, 'День рождения компании :' %> <%= f.text_field :birthdate, {type: 'date'} %>
+  </p>
+  <p>
+    <label for="company_notes">Примечание:</label> <%= f.text_area :notes %>
+  </p>
+  <%= f.submit "Создать", class: 'button' %>
+<% end %>
