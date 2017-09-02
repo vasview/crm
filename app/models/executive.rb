@@ -1,4 +1,4 @@
 class Executive < ApplicationRecord
-  belongs_to :company
-  belongs_to :representative
+  belongs_to :company, inverse_of: :executives
+  belongs_to :representative, inverse_of: :representatives
 end
