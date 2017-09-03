@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @executive = @company.executives.build
-    @representative = @company.representatives.build
+    @representative = @executive.build_representative
   end
 
   def index
@@ -11,12 +11,11 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find(params[:id])
-    @executive = Executive.where(company_id: @company.id)
-    @representative = Representative.find(@company.executives.first.representative_id)
+    @executive = @company.executives.first
+    @representative = @executive.representative
   end
 
   def create
-    # binding.pry
     @company = Company.create(company_params)
     if @company.save
       @representative = Representative.create(representative_params.merge(company_id: @company.id, company_head: true))
@@ -24,7 +23,7 @@ class CompaniesController < ApplicationController
       @executive = Executive.create(company_id: @company.id, representative_id: @representative.id)
       @executive.save
 
-      flash[:notice] = "Карточка компания успешно добавлена"
+      flash[:notice] = "Карточка компания успешно добавлена."
 
       redirect_to companies_path
     else
@@ -40,13 +39,13 @@ class CompaniesController < ApplicationController
 
   def update
     @company = Company.find(params[:id])
-    @executive = Executive.where(company_id: @company.id)
-    @representative = Representative.find(@company.executives.first.representative_id)
+    @executive = @company.executives.first
+    @representative = @executive.representative
 
     if @company.update_attributes(company_params)
       @representative.update_attributes(representative_params)
 
-      flash[:notice] = "Карточка компании успешно обновлена"
+      flash[:notice] = "Карточка компании успешно обновлена."
       redirect_to company_path(@company)
     else
       render :edit
@@ -55,6 +54,9 @@ class CompaniesController < ApplicationController
 
   def destroy
     @company = Company.find(params[:id])
+    @company.destroy
+
+    redirect_to companies_path, notice: "Карточка компании успешно удалена."
   end
 
   private

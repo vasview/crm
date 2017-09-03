@@ -1,5 +1,4 @@
 <%= form_for @company, class: 'company-form' do |f| %>
-  <h2>Создать компанию:</h2>
   <p>
     <%= f.label :category_id, 'Категория членов' %> <%= collection_select(:company, :category_id, Category.all, :id, :title, promp: true) %>
   </p>
@@ -10,7 +9,7 @@
     <label for="company_city">Город : </label><%= collection_select(:company, :city_id, City.all, :id, :name, promp: true) %>
   </p>
   <p>
-    <label for="company_address">Адрес:</label> <%= f.text_field :address %>
+    <label for="company_address">Адрес : </label> <%= f.text_field :address %>
   </p>
 
   <p>
@@ -26,16 +25,16 @@
     </p>
   <% end %>
   <p>
-    <label for="company_work_phone">Рабочий телефон:</label> <%= f.text_field :work_phone, {type: 'tel'} %>
+    <label for="company_work_phone">Рабочий телефон : </label> <%= f.text_field :work_phone, {type: 'tel'} %>
   </p>
   <p>
-    <label for="company_mobile_phone">Мобильный телефон:</label> <%= f.text_field :mobile_phone , {type: 'tel'} %>
+    <label for="company_mobile_phone">Мобильный телефон : </label> <%= f.text_field :mobile_phone , {type: 'tel'} %>
   </p>
   <p>
     <label for="company_email">Email:</label> <%= f.text_field :email, {type: 'email'} %>
   </p>
   <p>
-    <label for="company_industry">Сфера деятельности:</label><%= collection_select(:company, :industry_id, Industry.all, :id, :title, promp: true) %>
+    <label for="company_industry">Сфера деятельности : </label><%= collection_select(:company, :industry_id, Industry.all, :id, :title, promp: true) %>
   </p>
   <p>
     <%= f.label :birthdate, 'День рождения компании :' %> <%= f.text_field :birthdate, {type: 'date'} %>

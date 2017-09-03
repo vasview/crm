@@ -1,5 +1,7 @@
 <h2>Карточка компании <%= @company.name %></h2>
-
+  <p>
+    <%= link_to "Назад", companies_path %>
+  </p>
   <p>
     <%= label :category_id, 'Категория членов :' %> <%= Category.find(@company.category_id).title %>
   </p>
@@ -34,4 +36,9 @@
   </p>
   <p>
     <label for="company_notes">Примечание : </label> <%= @company.notes %>
+  </p>
+  <p>
+    <%= link_to "Редактировать", edit_company_path(@company) %> |
+    <%= link_to "Удалить", company_path(@company), :confirm => "Are you sure?", :method => :delete %>
+  </p>
 

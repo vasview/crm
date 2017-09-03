@@ -1,7 +1,12 @@
 <h1>Список компаний</h1>
+<p>
+  <%= link_to 'Добавить компанию', new_company_path %>
+</p>
 <% for company in @companies %>
 <p>
-  <%= company.name %>
+  <%= link_to company.name, company_path(company.id) %>
 </p>
 <% end %>
-<%= @companies.size %>
+<p>
+  Всего компаний : <%= @companies.size %>
+</p>
