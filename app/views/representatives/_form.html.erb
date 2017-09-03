@@ -15,6 +15,12 @@
     <%= f.label :job_position_id, 'Должность : ' %> <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, promp: true ) %>
   </p>
   <p>
+    <%= f.label 'Член коммитета : ' %>
+    <%= f.fields_for :committee_representatives do |com_rep| %>
+      <%= com_rep.collection_select(:committee_id, Committee.all, :id, :title, {include_blank: true}, {:multiple => true, :class=>""} ) %>
+    <% end %>
+  </p>
+  <p>
     <label for="representative_work_phone">Рабочий телефон : </label> <%= f.text_field :work_phone, {type: 'tel'} %>
   </p>
   <p>

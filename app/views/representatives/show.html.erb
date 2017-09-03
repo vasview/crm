@@ -11,6 +11,14 @@
   <label for="representative_position">Должность : </label><%= @representative.job_position.title %>
 </p>
 <p>
+  <label for="representative_committee">Член коммитета : </label>
+  <% unless @representative.committees.empty? %>
+    <% for committee in @representative.committees %>
+    <%= committee.title %> <br/>
+    <% end %>
+  <% end %>
+</p>
+<p>
   <label for="representative_work_phone">Рабочий телефон : </label><%= @representative.work_phone %>
 </p>
 <p>
