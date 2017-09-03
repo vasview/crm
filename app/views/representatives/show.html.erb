@@ -1,2 +1,31 @@
-<h1>Representatives#show</h1>
-<p>Find me in app/views/representatives/show.html.erb</p>
+<h2>Kарточка представителя компании: </h2>
+<p></p>
+
+<p>
+  <label for="representative_fullname">ФИО : </label><%= @representative.fullname %>
+</p>
+<p>
+  <label for="representative_company">Компания : </label><%= @representative.company.name %>
+</p>
+<p>
+  <label for="representative_position">Должность : </label><%= @representative.job_position.title %>
+</p>
+<p>
+  <label for="representative_work_phone">Рабочий телефон : </label><%= @representative.work_phone %>
+</p>
+<p>
+  <label for="representative_mobile_phone">Мобильный телефон : </label><%= @representative.mobile_phone %>
+</p>
+<p>
+  <label for="representative_email">Email : </label><%= @representative.email %>
+</p>
+<p>
+  <label for="representative_birthday">День Рождения : </label><%= @representative.birthdate %>
+</p>
+<p>
+  <label for="representative_notes">Примечания : </label><%= @representative.notes %>
+</p>
+<p>
+    <%= link_to "Редактировать", edit_representative_path(@representative) %> |
+    <%= link_to "Удалить", representative_path(@representative), :confirm => "Вы уверены?", :method => :delete %>
+  </p>

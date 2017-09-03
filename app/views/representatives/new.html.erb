@@ -1,16 +1,2 @@
-<%= form_for @company, class: 'company-form' do |f| %>
-  <h2>Создать компанию:</h2>
-  <%= f.label :name, 'Название' %> <%= f.text_field :name %><br/><br/>
-  <label for="company_city">Город:</label><%= collection_select(:company, :city_id, City.all, :id, :name, promp: true) %><br/><br/>
-  <label for="company_address">Адрес:</label> <%= f.text_field :address %><br/><br/><br/>
-  <label for="company_work_phone">Рабочий телефон:</label> <%= f.text_field :work_phone, {type: 'tel'} %><br/><br/>
-  <label for="company_mobile_phone">Мобильный телефон:</label> <%= f.text_field :mobile_phone , {type: 'tel'} %><br/>
-  <br/>
-  <label for="company_email">Email:</label> <%= f.text_field :email, {type: 'email'} %>
-  <br/><br/>
-  <label for="company_industry">Сфера деятельности:</label><%= collection_select(:company, :industry_id, Industry.all, :id, :title, promp: true) %><br/><br/>
-  <%= f.label :birthdate, 'День рождения компании :' %> <%= f.text_field :birthdate, {type: 'date'} %> <br />
-  <label for="company_notes">Примечание:</label> <%= f.text_area :notes %>
-  <br/><br/>
-  <%= f.submit "Создать", class: 'button' %>
-<% end %>
+<h2>Добавить представителя компании : </h2>
+<%= render 'form' %>

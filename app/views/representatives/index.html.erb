@@ -1,2 +1,9 @@
-<h1>Representatives#index</h1>
-<p>Find me in app/views/representatives/index.html.erb</p>
+<h1>Список всех представителей</h1>
+<p>
+  <%= link_to "Добавить представителя", new_representative_path %>
+</p>
+<% for representative in @representatives %>
+<p>
+  <%= link_to representative.fullname, representative_path(representative.id) %>
+</p>
+<% end %>

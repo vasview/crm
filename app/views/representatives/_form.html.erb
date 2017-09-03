@@ -1,0 +1,33 @@
+<%= form_for @representative, class: 'representative-form' do |f| %>
+  <p>
+    <%= f.label :firstname, 'Имя : ' %> <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :middlename, 'Отчество : ' %> <%= f.text_field :middlename %>
+  </p>
+  <p>
+    <%= f.label :lastname, 'Фамилия : ' %> <%= f.text_field :lastname %>
+  </p>
+  <p>
+    <%= f.label :company_id, 'Компания : ' %> <%= collection_select(:representative,:company_id, Company.all, :id, :name, promp: true ) %>
+  </p>
+  <p>
+    <%= f.label :job_position_id, 'Должность : ' %> <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, promp: true ) %>
+  </p>
+  <p>
+    <label for="representative_work_phone">Рабочий телефон : </label> <%= f.text_field :work_phone, {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="representative_mobile_phone">Мобильный телефон : </label> <%= f.text_field :mobile_phone , {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="representative_email">Email:</label> <%= f.text_field :email, {type: 'email'} %>
+  </p>
+  <p>
+    <%= f.label :birthdate, 'День рождения :' %> <%= f.text_field :birthdate, {type: 'date'} %>
+  </p>
+  <p>
+    <label for="company_notes">Примечание:</label> <%= f.text_area :notes %>
+  </p>
+  <%= f.submit "Создать", class: 'button' %>
+<% end %>
