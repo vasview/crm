@@ -1,4 +1,7 @@
 <h1>Список компаний</h1>
 <% for company in @companies %>
-<%= company.name %>
+<p>
+  <%= company.name %>
+</p>
 <% end %>
+<%= @companies.size %>

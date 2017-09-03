@@ -1,2 +1,37 @@
-<h1>Companies#show</h1>
-<p>Find me in app/views/companies/show.html.erb</p>
+<h2>Карточка компании <%= @company.name %></h2>
+
+  <p>
+    <%= label :category_id, 'Категория членов :' %> <%= Category.find(@company.category_id).title %>
+  </p>
+  <p>
+    <label for="company_city">Город : </label><%= City.find(@company.city_id).name %>
+  </p>
+  <p>
+    <label for="company_address">Адрес : </label> <%= @company.address %>
+  </p>
+
+  <p>
+    <label for="company_executive_name"> ФИО руководителя : <%= @representative.fullname %>
+  </p>
+  <p>
+      <label for="company_director"> Должность руководителя :
+      <%= JobPosition.find(@representative.job_position_id).title %>
+  </p>
+  <p>
+    <label for="company_work_phone">Рабочий телефон : </label> <%= @company.work_phone %>
+  </p>
+  <p>
+    <label for="company_mobile_phone">Мобильный телефон : </label> <%= @company.mobile_phone %>
+  </p>
+  <p>
+    <label for="company_email">Email : </label> <%= @company.email %>
+  </p>
+  <p>
+    <label for="company_industry">Сфера деятельности : </label><%= Industry.find(@company.industry_id).title %>
+  </p>
+  <p>
+    <%= label :birthdate, 'День рождения компании :' %> <%= @company.birthdate %>
+  </p>
+  <p>
+    <label for="company_notes">Примечание : </label> <%= @company.notes %>
+
