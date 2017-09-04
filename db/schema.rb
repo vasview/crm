@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20170904053144) do
   end
 
   create_table "committee_representatives", force: :cascade do |t|
-    t.integer "committee_id"
-    t.integer "representative_id"
+    t.bigint "committee_id"
+    t.bigint "representative_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["committee_id"], name: "index_committee_representatives_on_committee_id"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 20170904053144) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
-    t.integer "category_id"
-    t.integer "industry_id"
-    t.integer "city_id"
+    t.bigint "category_id"
+    t.bigint "industry_id"
+    t.bigint "city_id"
     t.string "address"
     t.string "work_phone"
     t.string "mobile_phone"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 20170904053144) do
   end
 
   create_table "executives", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "representative_id"
+    t.bigint "company_id"
+    t.bigint "representative_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_executives_on_company_id"
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20170904053144) do
 
   create_table "interaction_results", force: :cascade do |t|
     t.float "mark"
-    t.integer "company_id"
-    t.integer "interaction_id"
+    t.bigint "company_id"
+    t.bigint "interaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_interaction_results_on_company_id"
@@ -91,16 +91,17 @@ ActiveRecord::Schema.define(version: 20170904053144) do
   create_table "interactions", force: :cascade do |t|
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer "company_id"
-    t.integer "representative_id"
-    t.integer "service_id"
-    t.integer "user_id"
-    t.string "classifiable_type"
-    t.integer "classifiable_id"
+    t.bigint "company_id"
+    t.bigint "representative_id"
+    t.bigint "service_id"
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.bigint "committee_id"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["classifiable_type", "classifiable_id"], name: "index_interactions_on_classifiable_type_and_classifiable_id"
+    t.index ["category_id"], name: "index_interactions_on_category_id"
+    t.index ["committee_id"], name: "index_interactions_on_committee_id"
     t.index ["company_id"], name: "index_interactions_on_company_id"
     t.index ["representative_id"], name: "index_interactions_on_representative_id"
     t.index ["service_id"], name: "index_interactions_on_service_id"
@@ -120,8 +121,8 @@ ActiveRecord::Schema.define(version: 20170904053144) do
     t.string "work_phone"
     t.string "mobile_phone"
     t.string "email"
-    t.integer "company_id"
-    t.integer "job_position_id"
+    t.bigint "company_id"
+    t.bigint "job_position_id"
     t.date "birthdate"
     t.text "notes"
     t.boolean "company_head"
@@ -154,8 +155,8 @@ ActiveRecord::Schema.define(version: 20170904053144) do
     t.string "lastname"
     t.string "work_phone"
     t.string "mobile_phone"
-    t.integer "job_position_id"
-    t.integer "role_id"
+    t.bigint "job_position_id"
+    t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "fullname"
@@ -164,4 +165,23 @@ ActiveRecord::Schema.define(version: 20170904053144) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "committee_representatives", "committees"
+  add_foreign_key "committee_representatives", "representatives"
+  add_foreign_key "companies", "categories"
+  add_foreign_key "companies", "cities"
+  add_foreign_key "companies", "industries"
+  add_foreign_key "executives", "companies"
+  add_foreign_key "executives", "representatives"
+  add_foreign_key "interaction_results", "companies"
+  add_foreign_key "interaction_results", "interactions"
+  add_foreign_key "interactions", "categories"
+  add_foreign_key "interactions", "committees"
+  add_foreign_key "interactions", "companies"
+  add_foreign_key "interactions", "representatives"
+  add_foreign_key "interactions", "services"
+  add_foreign_key "interactions", "users"
+  add_foreign_key "representatives", "companies"
+  add_foreign_key "representatives", "job_positions"
+  add_foreign_key "users", "job_positions"
+  add_foreign_key "users", "roles"
 end

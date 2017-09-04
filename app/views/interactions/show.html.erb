@@ -1,0 +1,35 @@
+<h2>Просмотр взаимодействия</h2>
+
+  <p>
+    <%= link_to "На главную", root_path %>
+  </p>
+  <p>
+    <%= label :category_id, 'Категория членов :' %> <%= Category.find(@interaction.category_id).title unless @interaction.category_id.blank?%>
+  </p>
+  <p>
+    <label for="interaction_city">Компания : </label><%= Company.find(@interaction.company_id).name unless @interaction.company_id.blank? %>
+  </p>
+  <p>
+    <label for="interaction_address">Комитет : </label> <%= Committee.find(@interaction.committee_id).title unless @interaction.committee_id.blank? %>
+  </p>
+
+  <p>
+    <label for="interaction_representative_name"> ФИО представителя : <%= Representative.find(@interaction.representative_id).fullname %>
+  </p>
+  <p>
+    <label for="interaction_service">Вид услуги : </label> <%= Service.find(@interaction.service_id).name %>
+  </p>
+  <p>
+    <label for="interaction_user">Ответственный сотрудник : </label> <%= User.find(@interaction.user_id).fullname %>
+  </p>
+  <p>
+    <label for="interaction_date">Дата взаимодействия : </label> <%= @interaction.start_date %> - <%= @interaction.end_date %>
+  </p>
+  <p>
+    <label for="interaction_notes">Примечание : </label> <%= @interaction.notes %>
+  </p>
+  <p>
+    <%= link_to "Редактировать", edit_interaction_path(@interaction) %>
+  </p>
+
+

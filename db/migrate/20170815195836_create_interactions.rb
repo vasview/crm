@@ -7,7 +7,8 @@ class CreateInteractions < ActiveRecord::Migration[5.1]
       t.references :representative, foreign_key: true
       t.references :service, foreign_key: true
       t.references :user, foreign_key: true
-      t.references :classifiable, polymorphic: true, index: true
+      t.references :category, foreign_key: true
+      t.references :committee, foreign_key: true
       t.text :notes
 
       t.timestamps

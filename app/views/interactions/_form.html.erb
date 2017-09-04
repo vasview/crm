@@ -1,0 +1,33 @@
+<%= form_for @interaction, class: 'interaction-form' do |f| %>
+  <p>
+    <%= f.label 'Все члены' %> <%= check_box("all_members", "selected") %>
+  </p>
+  <p>
+    <%= f.label :category_id, 'Категория членов : ' %> <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: true}, promp: true) %>
+  </p>
+  <p>
+    <%= f.label :company_id, 'Компания : ' %> <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: true}, promp: true) %>
+  <p>
+    <label for="interaction_committee">Комитет : </label><%= collection_select(:interaction, :committee_id, Committee.all, :id, :title, {include_blank: true}, promp: true) %>
+  </p>
+  <p>
+    <%= f.label "ФИО представителя : " %> <%= collection_select(:interaction, :representative_id, Representative.all, :id, :fullname, promp: true) %>
+  </p>
+  <p>
+    <%= f.label "Вид услуги : " %> <%= collection_select(:interaction, :service_id, Service.all, :id, :name, promp: true) %>
+  </p>
+  <p>
+    <label for="interaction_user">Ответственный сотрудник : </label> <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, promp: true) %>
+  </p>
+  <p>
+    <label for="">Дата взаимодействия:</label>
+  </p>
+  <p>
+    <%= f.label :start_date, 'Начала :' %> <%= f.text_field :start_date, {type: 'date'} %>
+    <%= f.label :end_date, 'Oкончания :' %> <%= f.text_field :end_date, {type: 'date'} %>
+  </p>
+  <p>
+    <label for="interaction_notes">Примечание:</label> <%= f.text_area :notes %>
+  </p>
+  <%= f.submit "Создать", class: 'button' %>
+<% end %>
