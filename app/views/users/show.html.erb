@@ -1,0 +1,22 @@
+<h2>Kарточка пользователя: </h2>
+<p></p>
+
+<p>
+  <label for="user_fullname">ФИО : </label><%= @user.fullname %>
+</p>
+<p>
+  <label for="user_position">Должность : </label><%= @user.job_position.title %>
+</p>
+<p>
+  <label for="user_work_phone">Рабочий телефон : </label><%= @user.work_phone %>
+</p>
+<p>
+  <label for="user_mobile_phone">Мобильный телефон : </label><%= @user.mobile_phone %>
+</p>
+<p>
+  <label for="user_email">Email : </label><%= @user.email %>
+</p>
+<p>
+    <%= link_to "Редактировать", edit_user_path(@user) %> |
+    <%= link_to "Удалить", user_path(@user), :confirm => "Вы уверены?", :method => :delete %>
+</p>

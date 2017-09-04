@@ -1,0 +1,27 @@
+<%= form_for @user, class: 'user-form' do |f| %>
+  <p>
+    <%= f.label :firstname, 'Имя : ' %> <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :middlename, 'Отчество : ' %> <%= f.text_field :middlename %>
+  </p>
+  <p>
+    <%= f.label :lastname, 'Фамилия : ' %> <%= f.text_field :lastname %>
+  </p>
+  <p>
+    <%= f.label :role_id, 'Роль пользователя : ' %> <%= collection_select(:user,:role_id, Role.all, :id, :title, promp: true ) %>
+  </p>
+  <p>
+    <%= f.label :job_position_id, 'Должность : ' %> <%= collection_select(:user,:job_position_id, JobPosition.all, :id, :title, promp: true ) %>
+  </p>
+  <p>
+    <label for="user_work_phone">Рабочий телефон : </label> <%= f.text_field :work_phone, {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="user_mobile_phone">Мобильный телефон : </label> <%= f.text_field :mobile_phone , {type: 'tel'} %>
+  </p>
+  <p>
+    <label for="user_email">Email:</label> <%= f.text_field :email, {type: 'email'} %>
+  </p>
+  <%= f.submit "Создать", class: 'button' %>
+<% end %>

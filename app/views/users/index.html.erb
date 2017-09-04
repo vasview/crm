@@ -1,0 +1,9 @@
+<h2>Список пользователей системы</h2>
+<p>
+  <%= link_to 'Добавить пользователя', new_user_path %>
+</p>
+<% for user in @users %>
+  <p>
+    <%= link_to user.fullname, user_path(user.id) %>
+  </p>
+<% end %>
