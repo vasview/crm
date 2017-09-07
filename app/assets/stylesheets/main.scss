@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1200px;
+}
+header {
+  min-height: 60px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+.logo {
+  margin: 0 auto;
+  width: 15%;
+  float: left;
+  padding: 5px 0 0 20px;
+}
+.navbar {
+  padding:0;
+  margin: 0 auto;
+  width: 80%;
+  float: right;
+}
+.menu {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.menu__item {
+  display: inline-block;
+  margin: 0 15px;
+  padding: 0 5px;
+  line-height: 64px;
+}
+.menu__item-link {
+  margin: 0 auto;
+  padding: 20px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #3182DF;
+}
+.menu__item:hover {
+  background: #194775;
+}
+.menu__item:hover > a{
+  color: #fff;
+}
+.company__list {
+
+}
+.company__item {
+  margin: 5px auto;
+  padding: 5px;
+  width: 100%;
+  min-height: 20px;
+}
+.company__item-link {
+  text-decoration: none;
+  color: #000;
+}
+.company__item-name {
+  width: 60%;
+  padding: 0 10px;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+.company__item-interaction_result {
+  margin-left: 20px;
+  width: 30%;
+  font-style: italic;
+}
+.company__item-red {
+  background: red;
+}
+.company__item-yellow {
+  background: yellow;
+}
+.company__item-green {
+  background: green;
+}

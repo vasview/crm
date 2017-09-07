@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  attr_accessor :total
+  attr_accessor :total, :color
 
   belongs_to :category
   belongs_to :industry

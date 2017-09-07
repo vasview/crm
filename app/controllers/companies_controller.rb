@@ -9,6 +9,8 @@ class CompaniesController < ApplicationController
     @companies = Company.all
     @companies.each do |company|
       company.total = get_scores(company)
+
+      set_company_color(company)
     end
   end
 
@@ -83,5 +85,15 @@ class CompaniesController < ApplicationController
     marks = []
     company.interaction_results.map{|result| marks << result.mark }
     total = marks.inject(0, :+)
+  end
+
+  def set_company_color(company)
+    if company.total > 4
+      company.color = "green"
+    elsif company.total >= 1
+      company.color = "yellow"
+    else
+      company.color = "red"
+    end
   end
 end

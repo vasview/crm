@@ -1,13 +1,14 @@
-<h1>Список компаний</h1>
-<p>
-  <%= link_to 'Добавить компанию', new_company_path %>
-</p>
-<% for company in @companies %>
-<p>
-  <%= link_to company.name, company_path(company.id) %>
-  <span> Результат взаимодействия - <%= company.total %> </span>
-</p>
-<% end %>
+<h2>Список компаний</h2>
+<div class="company__list">
+  <% for company in @companies %>
+    <%= link_to company_path(company.id), class: 'company__item-link' do %>
+      <div class="company__item company__item-<%= company.color %>" >
+        <span class="company__item-name"><%= company.name %></span>
+        <span class="company__item-interaction_result">Результат взаимодействия - <%= company.total %></span>
+      </div>
+    <% end %>  
+  <% end %>
+</div>
 <p>
   Всего компаний : <%= @companies.size %>
 </p>
