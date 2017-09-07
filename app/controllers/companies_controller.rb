@@ -7,6 +7,9 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = Company.all
+    @companies.each do |company|
+      company.total = get_scores(company)
+    end
   end
 
   def show
@@ -74,5 +77,11 @@ class CompaniesController < ApplicationController
       whitelisted[:fullname] = params[:company][:executive][:representative][:fullname]
       whitelisted[:job_position_id] = params[:company][:executive][:representative][:job_position_id]
     end
+  end
+
+  def get_scores(company)
+    marks = []
+    company.interaction_results.map{|result| marks << result.mark }
+    total = marks.inject(0, :+)
   end
 end

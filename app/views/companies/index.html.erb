@@ -5,6 +5,7 @@
 <% for company in @companies %>
 <p>
   <%= link_to company.name, company_path(company.id) %>
+  <span> Результат взаимодействия - <%= company.total %> </span>
 </p>
 <% end %>
 <p>
