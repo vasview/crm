@@ -84,3 +84,18 @@ header {
 .company__item-green {
   background: green;
 }
+
+footer {
+  margin: 0 auto;
+  width: 100%;
+  height: 50px;
+  background: #f2f2f2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.footer__text {
+  margin: 0 auto;
+  padding: 17px 40% 0;
+}

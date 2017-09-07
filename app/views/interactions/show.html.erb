@@ -23,7 +23,7 @@
     <label for="interaction_user">Ответственный сотрудник : </label> <%= User.find(@interaction.user_id).fullname %>
   </p>
   <p>
-    <label for="interaction_date">Дата взаимодействия : </label> <%= @interaction.start_date %> - <%= @interaction.end_date %>
+    <label for="interaction_date">Дата взаимодействия : </label> <%= @interaction.start_date&.strftime("%d.%m.%Y") %> - <%= @interaction.end_date&.strftime("%d.%m.%Y") %>
   </p>
   <p>
     <label for="interaction_notes">Примечание : </label> <%= @interaction.notes %>

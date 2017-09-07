@@ -1,6 +1,6 @@
 <%= form_for @interaction, class: 'interaction-form' do |f| %>
   <p>
-    <%= f.label 'Все члены' %> <%= check_box("all_members", "selected") %>
+    <label for='all_members_selected'>Все члены</label> <%= check_box("all_members", "selected") %>
   </p>
   <p>
     <%= f.label :category_id, 'Категория членов : ' %> <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет'}, promp: true) %>
@@ -23,8 +23,8 @@
     <label for="">Дата взаимодействия:</label>
   </p>
   <p>
-    <%= f.label :start_date, 'Начала :' %> <%= f.text_field :start_date, {type: 'date'} %>
-    <%= f.label :end_date, 'Oкончания :' %> <%= f.text_field :end_date, {type: 'date'} %>
+    <%= f.label :start_date, 'Начало :' %> <%= f.text_field :start_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
+    <%= f.label :end_date, 'Oкончание :' %> <%= f.text_field :end_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
   </p>
   <p>
     <label for="interaction_notes">Примечание:</label> <%= f.text_area :notes %>
