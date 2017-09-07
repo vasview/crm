@@ -3,7 +3,7 @@
     <%= f.label 'Все члены' %> <%= check_box("all_members", "selected") %>
   </p>
   <p>
-    <%= f.label :category_id, 'Категория членов : ' %> <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: true}, promp: true) %>
+    <%= f.label :category_id, 'Категория членов : ' %> <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет'}, promp: true) %>
   </p>
   <p>
     <%= f.label :company_id, 'Компания : ' %> <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: true}, promp: true) %>

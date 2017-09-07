@@ -5,4 +5,6 @@ class Interaction < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
   belongs_to :committee, optional: true
+
+  has_many :interaction_results
 end
