@@ -1,14 +1,31 @@
 <h2>Список компаний</h2>
+<p>
+  Всего компаний : <%= @companies.size %> из них :
+  <span>корпоративных членов : <%= @corporate_members %>, </span>
+  <span>ассоциативных членов : <%= @associates_members %>, </span>
+  <span>почетных членов : <%= @honarable_members %></span>
+</p>
 <div class="company__list">
+  <div class="company__item-table-header">
+    <div class="company__item-header">
+      <span class="company__item-name">Название</span>
+      <span class="company__item-category">Категория</span>
+      <span class="company__item-interaction_result">Результат взаимодействия</span>
+    </div>
+    <div class="company__item-action-header">Паспорт</div>
+  </div>  
   <% for company in @companies %>
-    <%= link_to company_path(company.id), class: 'company__item-link' do %>
-      <div class="company__item company__item-<%= company.color %>" >
-        <span class="company__item-name"><%= company.name %></span>
-        <span class="company__item-interaction_result">Результат взаимодействия - <%= company.total %></span>
+    <div class="company__item-table">
+      <%= link_to new_company_path, class: 'company__item-link' do %>
+        <div class="company__item-row company__item-<%= company.color %>" >
+          <span class="company__item-name"><%= company.name %></span>
+          <span class="company__item-category"><%= company.category.title %> </span>
+          <span class="company__item-interaction_result"><%= company.total %></span>
+        </div>
+      <% end %>  
+      <div class="company__item-action">
+        <%= link_to image_tag('icons/icon_details.png'), company_path(company.id), class: 'company__details-link' %> 
       </div>
-    <% end %>  
+    </div>
   <% end %>
 </div>
-<p>
-  Всего компаний : <%= @companies.size %>
-</p>

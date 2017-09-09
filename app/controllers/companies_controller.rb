@@ -6,12 +6,17 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.all
+    @all_companies = Company.all
+    @companies = get_active_companies
+
     @companies.each do |company|
       company.total = get_scores(company)
 
       set_company_color(company)
     end
+    @corporate_members = get_corporate_members
+    @associates_members = get_accossiates_members
+    @honarable_members = get_honarable_members
   end
 
   def show
@@ -69,7 +74,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:id, :name, :address,
                                     :work_phone, :mobile_phone,
-                                    :email, :birthdate,
+                                    :email, :birthdate, :status,
                                     :category_id, :industry_id,
                                     :city_id, :notes)
   end
@@ -79,6 +84,12 @@ class CompaniesController < ApplicationController
       whitelisted[:fullname] = params[:company][:executive][:representative][:fullname]
       whitelisted[:job_position_id] = params[:company][:executive][:representative][:job_position_id]
     end
+  end
+
+  def get_active_companies
+    active_companies = []
+    active_companies += @all_companies.select{|company| company.is_active?}
+    active_companies
   end
 
   def get_scores(company)
@@ -95,5 +106,23 @@ class CompaniesController < ApplicationController
     else
       company.color = "red"
     end
+  end
+
+  def get_corporate_members
+    total_corporate_members = 0
+    (1..4).each do |i|
+      total_corporate_members += Category.find(i).companies.size
+    end
+    total_corporate_members
+  end
+
+  def get_accossiates_members
+    associates_category_id = Category.where(title: 'Ассоциативный член').ids
+    Category.find(associates_category_id.first).companies.size
+  end
+
+  def get_honarable_members
+    honorable_category_id = Category.where(title: 'Почетный член').ids
+    Category.find(honorable_category_id.first).companies.size
   end
 end

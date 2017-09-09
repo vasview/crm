@@ -40,6 +40,11 @@
     <%= f.label :birthdate, 'День рождения компании :' %> <%= f.text_field :birthdate, {type: 'date'} %>
   </p>
   <p>
+    <label for="status">Статус компании : </label> 
+    <%= radio_button('company', 'status', 'active', {class: 'company__status'}) %> <label for="company_status_active">Активна</label>
+    <%= radio_button('company', 'status', 'inactive', {class: 'company__status'}) %> <label for="company_status_inactive">Неактивна</label>
+  </p>
+  <p>
     <label for="company_notes">Примечание:</label> <%= f.text_area :notes %>
   </p>
   <%= f.submit "Создать", class: 'button' %>
