@@ -4,7 +4,7 @@ $(document).ready(function() {
     var $interactionCategoryIds = $("#interaction_category_id");
     var $interactionCommitteeIds = $("#interaction_committee_id");
     var $interactionCompanyIds = $('#interaction_company_id');
-
+    
     if ($(this).is(":checked")){
       console.log('checkbox is checked');
       $interactionCategoryIds.prop('disabled', 'disabled')
@@ -38,4 +38,4 @@ $(document).ready(function() {
     $interactionEndDate.val(enteredDate);
   });
 
-})
+});
