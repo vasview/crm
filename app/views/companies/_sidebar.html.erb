@@ -1,0 +1,62 @@
+<div class="sidebar__section">
+  <div class="sidebar__filter">
+    <h3 class="filter__title">Филтровать</h3>
+    <%= form_tag company_filters_path, method: :post, remote: true do %>
+      <p>
+        <label for="category_filter">По категории : </label>
+        <%= collection_select(:filter, :category, Category.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'category_filter_select') %>
+      </p>
+      <p>
+        <label for="color_filter">По цвету: </label>
+        <% CompaniesHelper::COMPANY_COLORS.each do |color| %>
+        <span class="filter__checkbox-row">
+          <%= check_box("filter", "colors", {:multiple => true}, color.downcase, nil) %>
+          <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
+        </span>  
+        <% end %>
+      </p>
+      <p>
+        <label for="date_filter">По дате : </label>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "1-6") %>
+          <%= label_tag "filter_date_first_1-6", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>  
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "6-12") %>
+          <%= label_tag "filter_date_second_6-12", 'II полугодие', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "12") %>
+          <%= label_tag "filter_date_12", 'Текущий год', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "period") %>
+          <%= label_tag "filter_date_period", 'Период', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row">
+          <%= text_field_tag 'filter_date_period', '', class: 'filter_date_period' %>
+          <input type="text" class='datepicker' >
+        </span>   
+      </p>
+      <%= submit_tag 'Применить', class: "filter__button" %>
+    <% end %>  
+  </div>
+  <div class="sidebar__legend">
+    <h3 class="filter__title">Легенда</h3>
+    <div class="legend__row">
+      <h4 class="legend__title"><span class="legend__result-red"></span>Результат взаимодействия менее 1</h4>
+    </div>
+    <div class="legend__row">  
+      <h4 class="legend__title"><span class="legend__result-yellow"></span>Результат взаимодействия от 1 до 4 </h4>
+    </div>
+    <div class="legend__row">  
+      <h4 class="legend__title"><span class="legend__result-green"></span>Результат взаимодействия более 4</h4>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

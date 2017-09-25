@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+ 
   def new
     @company = Company.new
     @executive = @company.executives.build
@@ -9,11 +10,8 @@ class CompaniesController < ApplicationController
     @all_companies = Company.all
     @companies = get_active_companies
 
-    @companies.each do |company|
-      company.total = get_scores(company)
-
-      set_company_color(company)
-    end
+    score_companies(@companies)
+    
     @corporate_members = get_corporate_members
     @associates_members = get_accossiates_members
     @honarable_members = get_honarable_members
@@ -69,6 +67,18 @@ class CompaniesController < ApplicationController
     redirect_to companies_path, notice: "Карточка компании успешно удалена."
   end
 
+  def get_filtered_companies
+    @companies = Company.filter(params[:filter].slice(:category))
+    
+    score_companies(@companies)
+    
+    if color_filters.present? 
+     @companies = filter_by_colors(@companies, color_filters)
+    end
+    
+    binding.pry
+  end
+
   private
 
   def company_params
@@ -86,10 +96,27 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def filter_params
+    params.require(:filter).permit(:colors, :category)
+  end
+
+  def color_filters
+    color_filters = params[:filter][:colors]
+  end
+
   def get_active_companies
     active_companies = []
     active_companies += @all_companies.select{|company| company.is_active?}
     active_companies
+  end
+
+  def score_companies(companies)
+    companies.each do |company|
+      company.total = get_scores(company)
+
+      set_company_color(company)
+    end
+    companies
   end
 
   def get_scores(company)
@@ -106,6 +133,10 @@ class CompaniesController < ApplicationController
     else
       company.color = "red"
     end
+  end
+
+  def filter_by_colors(companies, colors)
+    companies.select{ |company| colors.include?(company.color) }
   end
 
   def get_corporate_members

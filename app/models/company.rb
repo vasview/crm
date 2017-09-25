@@ -1,5 +1,10 @@
 class Company < ApplicationRecord
+  include Filterable
+
   attr_accessor :total, :color
+
+  scope :category, -> (category_id) { where category_id: category_id }
+  scope :status, -> (status) { where status: status }
 
   belongs_to :category
   belongs_to :industry

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :representatives
 
   resources :companies
-
+  
+  post 'company_filters', to: 'companies#get_filtered_companies'
+  
   resources :users
 
   resources :interactions, only: [:new, :create, :show, :edit, :update]

@@ -115,18 +115,17 @@ footer {
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  display: block;
 }
-.legend__row span {
-  margin: 0 5px 0;
+.legend__title {
+  margin: 0 5px 5px;
+  widows: 80%;
+}
+.legend__title span {
+  margin-right: 5px;
   padding: 0;
   display: inline-block;
   width: 20px;
   height: 15px;
-}
-.legend__title {
-  margin: 0 auto 5px;
-  display: inline-block;
 }
 .legend__result-red {
   background: rgba(255,0,0,0.6);

@@ -1,0 +1,14 @@
+<% for company in @companies %>
+  <div class="company__item-row-wrapper">
+    <%= link_to new_company_path, class: 'company__item-link' do %>
+      <div class="company__item-row company__item-<%= company.color %>" >
+        <span class="company__item-name"><%= company.name %></span>
+        <span class="company__item-category"><%= company.category.title %> </span>
+        <span class="company__item-interaction_result"><%= company.total %></span>
+      </div>
+    <% end %>  
+    <div class="company__item-action">
+      <%= link_to image_tag('icons/icon_details.png'), company_path(company.id), class: 'company__details-link' %> 
+    </div>
+  </div>
+<% end %>  

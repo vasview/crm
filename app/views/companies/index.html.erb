@@ -7,61 +7,9 @@
   </p>
   <div class="page__inner">
     <div class="main__section">
-      <div class="sidebar__section">
-        <div class="sidebar__filter">
-          <h3 class="filter__title">Филтровать</h3>
-          <p>
-            <label for="category_filter">По категории : </label>
-            <%= collection_select(:category, :category_id, Category.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'category_filter_select') %>
-          </p>
-          <p>
-            <label for="color_filter">По цвету: </label>
-            <% CompaniesHelper::COMPANY_COLORS.each do |color| %>
-            <span class="filter__checkbox-row">
-              <%= check_box("filter", "colors", {:multiple => true}, color, nil) %>
-              <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
-            </span>  
-            <% end %>
-          </p>
-          <p>
-            <label for="date_filter">По дате : </label>
-            <span class="filter__checkbox-row">
-              <%= radio_button_tag("filter_date", "1-6") %>
-              <%= label_tag "filter_date_first_1-6", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>
-            </span>  
-            <span class="filter__checkbox-row">
-              <%= radio_button_tag("filter_date", "6-12") %>
-              <%= label_tag "filter_date_second_6-12", 'II полугодие', class: "checkbox__label-date filter__checkbox-label" %>
-            </span>
-            <span class="filter__checkbox-row">
-              <%= radio_button_tag("filter_date", "12") %>
-              <%= label_tag "filter_date_12", 'Текущий год', class: "checkbox__label-date filter__checkbox-label" %>
-            </span>
-            <span class="filter__checkbox-row">
-              <%= radio_button_tag("filter_date", "select_period") %>
-              <%= label_tag "filter_date_select_period", 'За период', class: "checkbox__label-date filter__checkbox-label" %>
-            </span>
-            <span class="filter__checkbox-row">
-              <%= text_field_tag 'filter_date_period', '', class: 'filter_date_period' %>
-            </span>   
-          </p>
-          <%= submit_tag 'Применить', class: "filter__button" %>
-        </div>
-        <div class="sidebar__legend">
-          <h3 class="filter__title">Легенда</h3>
-          <div class="legend__row">
-            <span class="legend__result-red"></span><h4 class="legend__title">Результат < 1</h4>
-          </div>
-          <div class="legend__row">  
-            <span class="legend__result-yellow"></span><h4 class="legend__title">1 < Результат < 4</h4>
-          </div>
-          <div class="legend__row">  
-            <span class="legend__result-green"></span><h4 class="legend__title">Результат > 4</h4>
-          </div>
-        </div>
-      </div>
+      <%= render 'sidebar' %>
       <div class="company-list__section">
-        <div class="company__item-table-header">
+        <div class="company__table-header">
           <div class="company__item-header">
             <span class="company__item-name">Название</span>
             <span class="company__item-category">Категория</span>
@@ -69,20 +17,9 @@
           </div>
           <div class="company__item-action-header">Паспорт</div>
         </div>  
-        <% for company in @companies %>
-          <div class="company__item-table">
-            <%= link_to new_company_path, class: 'company__item-link' do %>
-              <div class="company__item-row company__item-<%= company.color %>" >
-                <span class="company__item-name"><%= company.name %></span>
-                <span class="company__item-category"><%= company.category.title %> </span>
-                <span class="company__item-interaction_result"><%= company.total %></span>
-              </div>
-            <% end %>  
-            <div class="company__item-action">
-              <%= link_to image_tag('icons/icon_details.png'), company_path(company.id), class: 'company__details-link' %> 
-            </div>
-          </div>
-        <% end %>
+        <div class="company__table">
+          <%= render partial: 'companies/company_item' %>
+      </div>  
       </div>
     </div>  
   </div>
