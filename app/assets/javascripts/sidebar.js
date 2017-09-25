@@ -1,4 +1,4 @@
-$(document).ready(function() { 
+$(document).on('turbolinks:load', function() { 
   var $companyFilterForm = $('#company_filter_form');
   var $periodRadioButtons = $companyFilterForm.find("input[type='radio']");
   var $submitButton = $companyFilterForm.find('.filter__btn-submit');
@@ -7,6 +7,7 @@ $(document).ready(function() {
   $($periodRadioButtons).on('change', function() {
     var $filterInputPeriod = $('.filter__input-period')
 
+      console.log($(this).val())
     if ( $(this).val() == 'period') {
       $filterInputPeriod.show();
     } else {
@@ -20,6 +21,7 @@ $(document).ready(function() {
     var $allFormInputs = $companyFilterForm.find('input');
     form = e.toElement.form;
     form.reset();
+    $('.filter__input-period').hide();
     $submitButton.click();
   });
 
