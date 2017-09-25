@@ -1,0 +1,14 @@
+  <h2>Список взаимодействий с компаний : <%= @company.name %></h2>
+  <p>
+    Всего взаимодействий : <%= @interactions.size %>
+  </p>
+  <% for interaction in @interactions %>
+    <div class="interaction__item-row-wrapper">
+      <div class="interaction__item-row">
+        Дата: <%= interaction.start_date.to_s %>, 
+        <%= interaction.service.name %>, 
+        <%= interaction.representative.fullname %>, 
+        <%= interaction.user.fullname %>
+      </div>
+    </div>
+  <% end %>

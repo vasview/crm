@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :representatives
 
-  resources :companies
+  resources :companies do 
+    get 'interactions', to: 'interactions#index'
+  end
   
   post 'company_filters', to: 'companies#get_filtered_companies'
   

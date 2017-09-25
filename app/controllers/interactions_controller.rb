@@ -1,4 +1,10 @@
 class InteractionsController < ApplicationController
+
+  def index
+    @company = Company.find(params[:company_id])
+    @interactions = Interaction.company(@company.id) 
+  end
+
   def new
     @interaction = Interaction.new
   end
