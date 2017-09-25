@@ -7,8 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @all_companies = Company.all
-    @companies = get_active_companies
+    @companies = Company.status('active').all
 
     score_companies(@companies)
     
@@ -70,7 +69,7 @@ class CompaniesController < ApplicationController
   def get_filtered_companies
     filter_period = get_filtered_period
 
-    @companies = Company.period(filter_period).filter(params[:filter].slice(:category))
+    @companies = Company.status('active').filter(period: filter_period).filter(params[:filter].slice(:category))
     
     score_companies(@companies)
     
@@ -82,6 +81,7 @@ class CompaniesController < ApplicationController
 
   def get_filtered_period
     filtered_period = []
+
     case date_filter
       when '1-6 month'
         start_day = DateTime.now().beginning_of_year
@@ -126,20 +126,20 @@ class CompaniesController < ApplicationController
   end
 
   def color_filters
-    color_filters = params[:filter][:colors]
+    params[:filter][:colors]
   end
 
   def period_filter
-    period_filter = params[:filter][:period] 
+    params[:filter][:period] 
   end
 
   def date_filter
-    date_filter = params[:filter][:date]
+    params[:filter][:date]
   end
 
   def default_end_day
     if DateTime.now().month <= 6
-      end_day = start_day + 6.month - 1.day
+      end_day = DateTime.now().beginning_of_year + 6.month - 1.day
     else 
       end_day = DateTime.now().end_of_year
     end  
@@ -149,14 +149,8 @@ class CompaniesController < ApplicationController
     if DateTime.now().month <= 6
       start_day = DateTime.now().beginning_of_year
     else 
-       start_day = end_day - 6.month + 1.day
+       start_day = DateTime.now().end_of_year - 6.month + 1.day
     end  
-  end
-
-  def get_active_companies
-    active_companies = []
-    active_companies += @all_companies.select{|company| company.is_active?}
-    active_companies
   end
 
   def score_companies(companies)
