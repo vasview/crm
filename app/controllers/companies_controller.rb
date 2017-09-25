@@ -68,7 +68,9 @@ class CompaniesController < ApplicationController
   end
 
   def get_filtered_companies
-    @companies = Company.filter(params[:filter].slice(:category))
+    filter_period = get_filtered_period
+
+    @companies = Company.period(filter_period).filter(params[:filter].slice(:category))
     
     score_companies(@companies)
     
@@ -76,7 +78,30 @@ class CompaniesController < ApplicationController
      @companies = filter_by_colors(@companies, color_filters)
     end
     
-    binding.pry
+  end
+
+  def get_filtered_period
+    filtered_period = []
+    case date_filter
+      when '1-6 month'
+        start_day = DateTime.now().beginning_of_year
+        end_day = start_day + 6.month - 1.day
+      when '6-12 month'
+        end_day = DateTime.now().end_of_year
+        start_day = end_day - 6.month + 1.day
+      when '12 month'
+        start_day = DateTime.now().beginning_of_year
+        end_day = DateTime.now().end_of_year
+      when 'period'
+        period = period_filter.split(' - ')
+        start_day = Date.parse(period.first)
+        end_day = Date.parse(period.last)
+      else
+        start_day = default_start_day
+        end_day = default_end_day
+    end
+
+    filtered_period = [start_day, end_day]
   end
 
   private
@@ -97,11 +122,35 @@ class CompaniesController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:colors, :category)
+    params.require(:filter).permit(:category, :date, :period, colors: [])
   end
 
   def color_filters
     color_filters = params[:filter][:colors]
+  end
+
+  def period_filter
+    period_filter = params[:filter][:period] 
+  end
+
+  def date_filter
+    date_filter = params[:filter][:date]
+  end
+
+  def default_end_day
+    if DateTime.now().month <= 6
+      end_day = start_day + 6.month - 1.day
+    else 
+      end_day = DateTime.now().end_of_year
+    end  
+  end
+
+  def default_start_day
+    if DateTime.now().month <= 6
+      start_day = DateTime.now().beginning_of_year
+    else 
+       start_day = end_day - 6.month + 1.day
+    end  
   end
 
   def get_active_companies

@@ -42,8 +42,6 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
     bindex (0.5.0)
-    bootstrap-datepicker-rails (1.7.1.1)
-      railties (>= 3.0)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.15.1)
@@ -188,7 +186,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-datepicker-rails
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
