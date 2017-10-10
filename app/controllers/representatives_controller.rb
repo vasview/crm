@@ -70,7 +70,7 @@ class RepresentativesController < ApplicationController
   end
 
   def get_filtered_representatives
-
+    @representatives = Representative.filter(params[:filter].slice(:company))
   end  
 
   private

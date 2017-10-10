@@ -1,0 +1,16 @@
+<table class="representative__table">
+  <tr class="table__row-header">
+    <th>ФИО</th>
+    <th>Компания</th>
+    <th>Должность</th>
+    <th>Телефон</th>
+  </tr>
+  <% for representative in @representatives %>
+  <tr class="table__item-row" data-link="<%= representative_path(representative.id) %>">
+    <td class="table__item"><%= representative.fullname %></td>
+    <td class="table__item"><%= representative.company.name %></td>
+    <td class="table__item"><%= representative.job_position.title %></td>
+    <td class="table__item"><%= representative.mobile_phone %></td>
+  </tr>
+  <% end %>
+</table>
