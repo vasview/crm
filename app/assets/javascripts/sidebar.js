@@ -7,7 +7,6 @@ $(document).on('turbolinks:load', function() {
   $($periodRadioButtons).on('change', function() {
     var $filterInputPeriod = $('.filter__input-period')
 
-      console.log($(this).val())
     if ( $(this).val() == 'period') {
       $filterInputPeriod.show();
     } else {

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   
   post 'company_filters', to: 'companies#get_filtered_companies'
+  post 'representative_filters', to: 'representatives#get_filtered_representatives'
   
   resources :users
 

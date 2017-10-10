@@ -1,0 +1,44 @@
+<div class="sidebar__section">
+  <div class="sidebar__filter">
+    <h3 class="filter__title">Филтровать</h3>
+    <%= form_tag representative_filters_path, id: "representative_filter_form", method: :post, remote: true do %>
+      <p>
+        <label for="company_filter">По компании : </label>
+        <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select') %>
+      </p>
+      <p>
+        <label for="color_filter">По цвету: </label>
+        <% CompaniesHelper::COMPANY_COLORS.each do |color| %>
+        <span class="filter__checkbox-row">
+          <%= check_box("filter", "colors", {:multiple => true}, color.downcase, nil) %>
+          <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
+        </span>  
+        <% end %>
+      </p>
+      <p>
+        <label for="date_filter">По дате : </label>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "1-6 month") %>
+          <%= label_tag "filter_date_1-6_month", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>  
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "6-12 month") %>
+          <%= label_tag "filter_date_6-12_month", 'II полугодие', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "12 month") %>
+          <%= label_tag "filter_date_12_month", 'Текущий год', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row">
+          <%= radio_button_tag("filter[date]", "period") %>
+          <%= label_tag "filter_date_period", 'Период', class: "checkbox__label-date filter__checkbox-label" %>
+        </span>
+        <span class="filter__checkbox-row filter__datepicker-row">
+          <input name="filter[period]" class="datepicker-here filter__input-period" data-range="true" data-multiple-dates-separator=" - " data-clear-button="true" data-auto-close="true" data-position="top left">
+        </span>   
+      </p>
+      <%= submit_tag 'Применить', class: "filter__button filter__btn-submit" %>
+      <%= submit_tag 'Сбросить', type: :reset, class: "filter__button filter__btn-cancel" %>
+    <% end %>  
+  </div>
+</div>

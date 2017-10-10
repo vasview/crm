@@ -69,6 +69,10 @@ class RepresentativesController < ApplicationController
     redirect_to representatives_path, notice: "Карточка представителя компании удалена."
   end
 
+  def get_filtered_representatives
+
+  end  
+
   private
 
   def representative_params

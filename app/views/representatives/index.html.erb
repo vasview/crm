@@ -2,8 +2,26 @@
 <p>
   <%= link_to "Добавить представителя", new_representative_path %>
 </p>
-<% for representative in @representatives %>
-<p>
-  <%= link_to representative.fullname, representative_path(representative.id) %>
-</p>
-<% end %>
+<div class="page__inner">
+  <div class="main__section">
+    <%= render 'sidebar' %>
+    <div class="list__block">
+      <table class="representative__table">
+        <tr>
+          <th>ФИО</th>
+          <th>Компания</th>
+          <th>Должность</th>
+          <th>Телефон</th>
+        </tr>
+        <% for representative in @representatives %>
+        <tr data-link="<%= representative_path(representative.id) %>">
+          <td><%= representative.fullname %></td>
+          <td><%= representative.company.name %></td>
+          <td><%= representative.job_position.title %></td>
+          <td><%= representative.mobile_phone %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>  
+</div>  
