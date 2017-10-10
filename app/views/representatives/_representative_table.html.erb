@@ -6,7 +6,7 @@
     <th>Телефон</th>
   </tr>
   <% for representative in @representatives %>
-  <tr class="table__item-row" data-link="<%= representative_path(representative.id) %>">
+  <tr class="table__item-row" data-link="<%= representative_path(representative.id) %>" data-turbolinks="false">
     <td class="table__item"><%= representative.fullname %></td>
     <td class="table__item"><%= representative.company.name %></td>
     <td class="table__item"><%= representative.job_position.title %></td>
