@@ -6,22 +6,27 @@
   <div class="main__section">
     <%= render 'sidebar' %>
     <div class="list__block">
-      <table class="representative__table">
-        <tr>
-          <th>ФИО</th>
-          <th>Компания</th>
-          <th>Должность</th>
-          <th>Телефон</th>
-        </tr>
-        <% for representative in @representatives %>
-        <tr data-link="<%= representative_path(representative.id) %>">
-          <td><%= representative.fullname %></td>
-          <td><%= representative.company.name %></td>
-          <td><%= representative.job_position.title %></td>
-          <td><%= representative.mobile_phone %></td>
-        </tr>
-        <% end %>
-      </table>
+      <div class="table__wrapper">
+        <table class="representative__table">
+          <tr class="table__row-header">
+            <th>ФИО</th>
+            <th>Компания</th>
+            <th>Должность</th>
+            <th>Телефон</th>
+          </tr>
+          <% for representative in @representatives %>
+          <tr class="table__item-row" data-link="<%= representative_path(representative.id) %>">
+            <td class="table__item"><%= representative.fullname %></td>
+            <td class="table__item"><%= representative.company.name %></td>
+            <td class="table__item"><%= representative.job_position.title %></td>
+            <td class="table__item"><%= representative.mobile_phone %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="digg_pagination pagination__block">
+        <%= will_paginate @representatives %>
+      </div>
     </div>
   </div>  
 </div>  

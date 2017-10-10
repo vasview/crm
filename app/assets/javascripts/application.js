@@ -4,4 +4,5 @@
 //= require sidebar
 //= require interactions
 //= require plugins
+//= require main
 //= require_tree .

@@ -6,7 +6,7 @@ class RepresentativesController < ApplicationController
   end
 
   def index
-    @representatives = Representative.all
+    @representatives = Representative.paginate(page: params[:page])
   end
 
   def show
