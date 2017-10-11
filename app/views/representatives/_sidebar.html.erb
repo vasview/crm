@@ -7,35 +7,13 @@
         <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select') %>
       </p>
       <p>
-        <label for="color_filter">По цвету: </label>
-        <% CompaniesHelper::COMPANY_COLORS.each do |color| %>
-        <span class="filter__checkbox-row">
-          <%= check_box("filter", "colors", {:multiple => true}, color.downcase, nil) %>
-          <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
-        </span>  
-        <% end %>
+        <label for="job_filter">По должности : </label>
+        <%= collection_select(:filter, :job, JobPosition.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'job_filter_select', style: 'width: 160px;') %>
       </p>
+      <h3 class="filter__title">Поиск</h3>
+      
       <p>
-        <label for="date_filter">По дате : </label>
-        <span class="filter__checkbox-row">
-          <%= radio_button_tag("filter[date]", "1-6 month") %>
-          <%= label_tag "filter_date_1-6_month", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>
-        </span>  
-        <span class="filter__checkbox-row">
-          <%= radio_button_tag("filter[date]", "6-12 month") %>
-          <%= label_tag "filter_date_6-12_month", 'II полугодие', class: "checkbox__label-date filter__checkbox-label" %>
-        </span>
-        <span class="filter__checkbox-row">
-          <%= radio_button_tag("filter[date]", "12 month") %>
-          <%= label_tag "filter_date_12_month", 'Текущий год', class: "checkbox__label-date filter__checkbox-label" %>
-        </span>
-        <span class="filter__checkbox-row">
-          <%= radio_button_tag("filter[date]", "period") %>
-          <%= label_tag "filter_date_period", 'Период', class: "checkbox__label-date filter__checkbox-label" %>
-        </span>
-        <span class="filter__checkbox-row filter__datepicker-row">
-          <input name="filter[period]" class="datepicker-here filter__input-period" data-range="true" data-multiple-dates-separator=" - " data-clear-button="true" data-auto-close="true" data-position="top left">
-        </span>   
+        <input type="text" name="filter[search]" class="search" style="width: 160px;">
       </p>
       <%= submit_tag 'Применить', class: "filter__button filter__btn-submit" %>
       <%= submit_tag 'Сбросить', type: :reset, class: "filter__button filter__btn-cancel" %>

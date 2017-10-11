@@ -1,7 +1,7 @@
-var $representativeTableWrapper = $('.table__wrapper');
+var $representativeListBlock = $('.representative_list__block');
 var representative_table;
 
-$representativeTableWrapper.html('');
+$representativeListBlock.html('');
 
 representative_table = '<%= j render "representatives/representative_table" %>';
-$representativeTableWrapper.append(representative_table);
+$representativeListBlock.append(representative_table);

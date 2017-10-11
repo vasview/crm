@@ -2,6 +2,7 @@
 //= require turbolinks
 //= require jquery-3.2.0.min
 //= require sidebar
+//= require representative_sidebar
 //= require interactions
 //= require plugins
 //= require main
