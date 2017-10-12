@@ -68,7 +68,14 @@ ROLES =         {'ADMIN': 'Администратор системы. Имеет
                  'OPERATOR': 'Оператор системы. Может создавать записи.',
                  'USER': 'Пользователь системы. Может просматривать записи.'}
 
-USERS =          ['Асель', 'Данияр', 'Аскар', 'Лидия', 'Рустам', 'Дастан']                 
+USERS =          ['Асель', 'Данияр', 'Аскар', 'Лидия', 'Рустам', 'Дастан']
+
+USER_EMAILS =   ['asel@yandex.ru', 
+                 'daniyar@yandex.ru', 
+                 'askar@yandex.ru',
+                 'lidia@yandex.ru',
+                 'rustam@yandex.ru',
+                 'dastan@yandex.ru' ]                 
 
 # Добавляем список городов
 puts "Добавляем список городов"
@@ -215,14 +222,22 @@ begin
 
   USER_PASSWORD = '123456'
 
+<<<<<<< HEAD
   USERS.each do |user| 
+=======
+  USERS.each_with_index do |user, i| 
+>>>>>>> #2 Seeds for system users and admin were added
     new_user = User.new
     new_user.firstname = user
     new_user.job_position = JobPosition.find_by_title('Менеджер')
     new_user.role = Role.find_by_title('OPERATOR')
     new_user.password = USER_PASSWORD
     new_user.password_confirmation = USER_PASSWORD
+<<<<<<< HEAD
     new_user.email = "#{user}@yandex.ru"
+=======
+    new_user.email = USER_EMAILS[i]
+>>>>>>> #2 Seeds for system users and admin were added
     new_user.save!
   end
 rescue Exception => e
