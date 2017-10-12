@@ -12,7 +12,7 @@ class Representative < ApplicationRecord
 
   scope :company, -> (company_id) { where company_id: company_id }
   scope :job, -> (job_position_id) { where job_position_id: job_position_id }
-  scope :search, -> (name) { where("fullname like ?", "%#{name}%")}
+  scope :search, -> (name) { where("fullname ILIKE ?", "%#{name}%")}
 
   def self.per_page 
     7
