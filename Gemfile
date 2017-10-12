@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 # Use postgres as the database for Active Record
 gem 'pg'
 gem 'will_paginate', '~> 3.1.0'
+gem "interactor", "~> 3.0"
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
