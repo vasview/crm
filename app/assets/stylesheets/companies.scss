@@ -15,7 +15,8 @@
   display: inline-block;
 }
 .company__item-row:hover {
-  background: #581865;
+  // background: #581865;
+  background: #9b59b6;
   // background: rgba(0,0,255,0.3);
   color: #fff;
   font-size: 16px;
@@ -49,16 +50,16 @@
   text-align: center;
 }
 .company__item-red {
-  // background: red;
-  background: rgba(255,0,0,0.6);
+  background: #e74c3c;
+  // background: rgba(255,0,0,0.6);
 }
 .company__item-yellow {
-  // background: yellow;
-  background: rgba(255,255,0,0.5);
+  background: #f1c40f;
+  // background: rgba(255,255,0,0.5);
 }
 .company__item-green {
-  // background: green;
-  background: rgba(0,255,0,0.3);
+  background: #2ecc71;
+  // background: rgba(0,255,0,0.3);
 }
 .company__item-action {
   vertical-align: middle;
@@ -128,13 +129,16 @@
   width: 100px;
 }
 .checkbox__label-red {
-  background: rgba(255,0,0,0.6);
+  background: #e74c3c;
+  // background: rgba(255,0,0,0.6);
 }
 .checkbox__label-yellow {
-  background: rgba(255,255,0,0.5);
+  background: #f1c40f;
+  // background: rgba(255,255,0,0.5);
 }
 .checkbox__label-green {
-  background: rgba(0,255,0,0.3);
+  background: #2ecc71;
+  // background: rgba(0,255,0,0.3);
 }
 .filter_date_period {
   width: 80%;

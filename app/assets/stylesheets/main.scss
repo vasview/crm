@@ -128,13 +128,16 @@ footer {
   height: 15px;
 }
 .legend__result-red {
-  background: rgba(255,0,0,0.6);
+  background: #e74c3c;
+  // background: rgba(255,0,0,0.6);
 }
 .legend__result-yellow {
-  background: rgba(255,255,0,0.5);
+  background: #f1c40f;
+  // background: rgba(255,255,0,0.5);
 }
 .legend__result-green {
-  background: rgba(0,255,0,0.3);
+  background: #2ecc71;
+  // background: rgba(0,255,0,0.3);
 }
 .filter__button {
   margin: 0 10px 10px 12px;
