@@ -17,7 +17,7 @@
     <%= f.label "Вид услуги : " %> <%= collection_select(:interaction, :service_id, Service.all, :id, :name, promp: true) %>
   </p>
   <p>
-    <label for="interaction_user">Ответственный сотрудник : </label> <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, promp: true) %>
+    <label for="interaction_user">Ответственный сотрудник : </label> <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, promp: true, selected: current_user.id) %>
   </p>
   <p>
     <label for="">Дата взаимодействия:</label>
