@@ -1,19 +1,22 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
 
   $('#all_members_selected').change(function(){
     var $interactionCategoryIds = $("#interaction_category_id");
     var $interactionCommitteeIds = $("#interaction_committee_id");
     var $interactionCompanyIds = $('#interaction_company_id');
+    var $interactionRepresentativeId = $('#interaction_representative_id');
     
     if ($(this).is(":checked")){
       console.log('checkbox is checked');
-      $interactionCategoryIds.prop('disabled', 'disabled')
-      $interactionCompanyIds.prop('disabled', 'disabled')
-      $interactionCommitteeIds.prop('disabled', 'disabled')
+      $interactionCategoryIds.prop('disabled', 'disabled');
+      $interactionCompanyIds.prop('disabled', 'disabled');
+      $interactionCommitteeIds.prop('disabled', 'disabled');
+      $interactionRepresentativeId.prop('disabled', 'disabled');
     } else {
-      $interactionCategoryIds.prop('disabled', false)
-      $interactionCompanyIds.prop('disabled', false)
-      $interactionCommitteeIds.prop('disabled', false)
+      $interactionCategoryIds.prop('disabled', false);
+      $interactionCompanyIds.prop('disabled', false);
+      $interactionCommitteeIds.prop('disabled', false);
+      $interactionRepresentativeId.prop('disabled', false);
     }
   });
 

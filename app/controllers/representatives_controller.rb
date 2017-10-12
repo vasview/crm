@@ -42,6 +42,7 @@ class RepresentativesController < ApplicationController
   end
 
   def update
+    binding.pry
     @representative = Representative.find(params[:id])
 
     @count_committees = representative_committees_params.size
@@ -95,6 +96,6 @@ class RepresentativesController < ApplicationController
 
   def representative_update_params
     representative_params.merge(fullname: representative_fullname)
-    representative_params.except(:committee_representatives_attributes)
+                         .except(:committee_representatives_attributes)
   end
 end
