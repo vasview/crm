@@ -7,7 +7,6 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    # binding.pry
     @companies = Company.status('active').all
 
     score_companies(@companies)

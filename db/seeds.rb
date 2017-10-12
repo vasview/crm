@@ -222,22 +222,15 @@ begin
 
   USER_PASSWORD = '123456'
 
-<<<<<<< HEAD
-  USERS.each do |user| 
-=======
   USERS.each_with_index do |user, i| 
->>>>>>> #2 Seeds for system users and admin were added
     new_user = User.new
     new_user.firstname = user
+    new_user.fullname = user
     new_user.job_position = JobPosition.find_by_title('Менеджер')
     new_user.role = Role.find_by_title('OPERATOR')
     new_user.password = USER_PASSWORD
     new_user.password_confirmation = USER_PASSWORD
-<<<<<<< HEAD
-    new_user.email = "#{user}@yandex.ru"
-=======
     new_user.email = USER_EMAILS[i]
->>>>>>> #2 Seeds for system users and admin were added
     new_user.save!
   end
 rescue Exception => e
