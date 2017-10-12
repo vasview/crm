@@ -61,11 +61,14 @@ JOB_POSITIONS = ['Генеральный директор',
                  'Старший банкир',
                  'Директор',
                  'Исполнительный директор',
-                 'Управляющий директор']
+                 'Управляющий директор',
+                 'Менеджер']
 
 ROLES =         {'ADMIN': 'Администратор системы. Имеет полные права.',
                  'OPERATOR': 'Оператор системы. Может создавать записи.',
                  'USER': 'Пользователь системы. Может просматривать записи.'}
+
+USERS =          ['Асель', 'Данияр', 'Аскар', 'Лидия', 'Рустам', 'Дастан']                 
 
 # Добавляем список городов
 puts "Добавляем список городов"
@@ -181,5 +184,53 @@ rescue Exception => e
   puts "Конец листинга +++++++++++++++++++++++++++++++++++"
 else
   puts "\x1b[32m Список ролей пользователей системы успешно добавлен! \x1b[0m"
+  puts "========================="
+end
+
+# Добавляем админа системы
+begin
+  puts "Добавляем админа системы"
+
+  PASSWORD = 'Passw0rd'
+  
+  User.create!(firstname: 'Admin',
+              job_position_id: JobPosition.find_by_title('Менеджер').id,
+              role_id: Role.find_by_title('ADMIN').id,
+              password: PASSWORD,
+              password_confirmation: PASSWORD,
+              email: 'admin@yandex.ru')
+rescue Exception => e
+  puts "\x1b[31m Проблема при добавлении администратора системы \x1b[0m"
+  puts "Начало листинг +++++++++++++++++++++++++++++++++++"
+  puts e.backtrace.join("\n")
+  puts "Конец листинга +++++++++++++++++++++++++++++++++++"
+else
+  puts "\x1b[32m Администратор системы успешно добавлен! \x1b[0m"
+  puts "========================="
+end
+
+# Добавляем пользователей системы
+begin
+  puts "Добавляем пользователей системы"
+
+  USER_PASSWORD = '123456'
+
+  USERS.each do |user| 
+    new_user = User.new
+    new_user.firstname = user
+    new_user.job_position = JobPosition.find_by_title('Менеджер')
+    new_user.role = Role.find_by_title('OPERATOR')
+    new_user.password = USER_PASSWORD
+    new_user.password_confirmation = USER_PASSWORD
+    new_user.email = "#{user}@yandex.ru"
+    new_user.save!
+  end
+rescue Exception => e
+  puts "\x1b[31m Проблема при добавлении пользователей системы \x1b[0m"
+  puts "Начало листинг +++++++++++++++++++++++++++++++++++"
+  puts e.backtrace.join("\n")
+  puts "Конец листинга +++++++++++++++++++++++++++++++++++"
+else
+  puts "\x1b[32m Пользователи системы успешно добавлены! \x1b[0m"
   puts "========================="
 end
