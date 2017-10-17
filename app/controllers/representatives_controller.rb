@@ -42,7 +42,6 @@ class RepresentativesController < ApplicationController
   end
 
   def update
-    binding.pry
     @representative = Representative.find(params[:id])
 
     @count_committees = representative_committees_params.size
@@ -80,7 +79,7 @@ class RepresentativesController < ApplicationController
   def representative_params
     params.require(:representative).permit(:id, :firstname, :middlename, :lastname,
                                            :work_phone, :mobile_phone, :email, :company_id,
-                                           :job_position_id, :birthdate, :notes,
+                                           :job_position_id, :birthdate, :notes, :preferences,
                                            committee_representatives_attributes: [committee_id: [] ])
   end
 
