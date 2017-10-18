@@ -1,5 +1,7 @@
-<h2>Создать карточку компанию:</h2>
-<p>
-  <%= link_to "Назад", companies_path %>
-</p>
-<%= render 'form' %>
+<div class="page__inner">
+  <p class="back-link__block">
+    <%= link_to "<< К списку компаний", companies_path, class: 'back-link' %>
+  </p>
+  <h2 class="form__title">Создать карточку компанию : </h2>
+  <%= render 'form' %>
+</div>

@@ -25,6 +25,8 @@ table.representative__table,
 }
 .form__title {
   text-align: center;
+  margin: 0 auto;
+  padding: 5px 0 10px;
 }  
 .form__wrapper {
   margin: 0 auto;
@@ -48,6 +50,7 @@ table.representative__table,
 .form__textarea {
   width: 300px;
   height: 100px;
+  vertical-align: middle;
 }
 .form__button {
   width: 300px;

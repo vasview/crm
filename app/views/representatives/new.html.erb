@@ -1,4 +1,7 @@
 <div class="page__inner">
+  <p class="back-link__block">
+    <%= link_to "<< К списку представителей", representatives_path, class: 'back-link' %>
+  </p>
   <h2 class="form__title">Добавить представителя компании : </h2>
   <%= render 'form' %>
 </div>
