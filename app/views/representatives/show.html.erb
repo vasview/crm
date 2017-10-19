@@ -1,42 +1,56 @@
-<h2>Kарточка представителя компании: </h2>
-<p></p>
-
-<p>
-  <label for="representative_fullname">ФИО : </label><%= @representative.fullname %>
-</p>
-<p>
-  <label for="representative_company">Компания : </label><%= @representative.company.name %>
-</p>
-<p>
-  <label for="representative_position">Должность : </label><%= @representative.job_position.title %>
-</p>
-<p>
-  <label for="representative_committee">Член коммитета : </label>
-  <% unless @representative.committees.empty? %>
-    <% for committee in @representative.committees %>
-    <%= committee.title %> <br/>
-    <% end %>
-  <% end %>
-</p>
-<p>
-  <label for="representative_work_phone">Рабочий телефон : </label><%= @representative.work_phone %>
-</p>
-<p>
-  <label for="representative_mobile_phone">Мобильный телефон : </label><%= @representative.mobile_phone %>
-</p>
-<p>
-  <label for="representative_email">Email : </label><%= @representative.email %>
-</p>
-<p>
-  <label for="representative_birthday">День Рождения : </label><%= @representative.birthdate %>
-</p>
-<p>
-  <label for="representative_preferences">Предпочтения : </label><%= @representative.preferences %>
-</p>
-<p>
-  <label for="representative_notes">Примечания : </label><%= @representative.notes %>
-</p>
-<p>
-    <%= link_to "Редактировать", edit_representative_path(@representative) %> |
-    <%= link_to "Удалить", representative_path(@representative), :confirm => "Вы уверены?", :method => :delete %>
-  </p>
+<div class="page__inner">
+  <div class="card-info__block">
+    <p class="back-link__block">
+      <%= link_to "Назад", representatives_path, class: 'back-link' %>
+    </p>  
+    <h2 class="card__title">Kарточка представителя компании: </h2>
+    <div class="card__row">
+      <label for="representative_fullname" class="card__label">ФИО : </label>
+      <%= @representative.fullname %>
+    </div>
+    <div class="card__row">
+      <label for="representative_company" class="card__label">Компания : </label>
+      <%= @representative.company.name %>
+    </div>
+    <div class="card__row">
+      <label for="representative_position" class="card__label">Должность : </label>
+      <%= @representative.job_position.title %>
+    </div>
+    <div class="card__row">
+      <label for="representative_committee" class="card__label">Член коммитета : </label>
+      <% unless @representative.committees.empty? %>
+        <% for committee in @representative.committees %>
+        <%= committee.title %> <br/>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card__row">
+      <label for="representative_work_phone" class="card__label">Рабочий телефон : </label>
+      <%= @representative.work_phone %>
+    </div>
+    <div class="card__row">
+      <label for="representative_mobile_phone" class="card__label">Мобильный телефон : </label>
+      <%= @representative.mobile_phone %>
+    </div>
+    <div class="card__row">
+      <label for="representative_email" class="card__label">Email : </label>
+      <%= @representative.email %>
+    </div>
+    <div class="card__row">
+      <label for="representative_birthday" class="card__label">День Рождения : </label>
+      <%= @representative.birthdate %>
+    </div>
+    <div class="card__row">
+      <label for="representative_preferences" class="card__label">Предпочтения : </label>
+      <%= @representative.preferences %>
+    </div>
+    <div class="card__row">
+      <label for="representative_notes" class="card__label">Примечания : </label>
+      <%= @representative.notes %>
+    </div>
+    <div class="card__row card__row-action">
+        <%= link_to "Редактировать", edit_representative_path(@representative) %> |
+        <%= link_to "Удалить", representative_path(@representative), :confirm => "Вы уверены?", :method => :delete %>
+    </div>
+  </div>
+</div>  
