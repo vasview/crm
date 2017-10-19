@@ -1,33 +1,47 @@
-<%= form_for @interaction, class: 'interaction-form' do |f| %>
-  <p>
-    <label for='all_members_selected'>Все члены</label> <%= check_box("all_members", "selected") %>
-  </p>
-  <p>
-    <%= f.label :category_id, 'Категория членов : ' %> <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет'}, promp: true) %>
-  </p>
-  <p>
-    <%= f.label :company_id, 'Компания : ' %> <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: true}, promp: true) %>
-  <p>
-    <label for="interaction_committee">Комитет : </label><%= collection_select(:interaction, :committee_id, Committee.all, :id, :title, {include_blank: true}, promp: true) %>
-  </p>
-  <p>
-    <%= f.label "ФИО представителя : " %> <%= collection_select(:interaction, :representative_id, Representative.all, :id, :fullname, promp: true) %>
-  </p>
-  <p>
-    <%= f.label "Вид услуги : " %> <%= collection_select(:interaction, :service_id, Service.all, :id, :name, promp: true) %>
-  </p>
-  <p>
-    <label for="interaction_user">Ответственный сотрудник : </label> <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, promp: true, selected: current_user.id) %>
-  </p>
-  <p>
-    <label for="">Дата взаимодействия:</label>
-  </p>
-  <p>
-    <%= f.label :start_date, 'Начало :' %> <%= f.text_field :start_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
-    <%= f.label :end_date, 'Oкончание :' %> <%= f.text_field :end_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
-  </p>
-  <p>
-    <label for="interaction_notes">Примечание:</label> <%= f.text_area :notes %>
-  </p>
-  <%= f.submit "Создать", class: 'button' %>
-<% end %>
+<div class="form__wrapper">
+  <%= form_for @interaction, class: 'interaction-form' do |f| %>
+    <div class="form__row">
+      <label for='all_members_selected' class="form__label">Все члены</label> 
+      <%= check_box("all_members", "selected") %>
+    </div>
+    <div class="form__row">
+      <%= f.label :category_id, 'Категория членов : ', class: 'form__label' %> 
+      <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет'}, {promp: true, class: 'form__input'}) %>
+    </div>
+    <div class="form__row">
+      <label for="interaction_committee" class="form__label">Комитет : </label>
+      <%= collection_select(:interaction, :committee_id, Committee.all, :id, :title, {include_blank: true}, {promp: true, class: 'form__input'}) %>
+    </div>
+    <div class="form__row">
+      <%= f.label :company_id, 'Компания : ', class: 'form__label' %> 
+      <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: true}, {promp: true, class: 'form__input'}) %>
+    </div>
+    <div class="form__row">
+      <%= f.label "ФИО представителя : ", class: 'form__label'%> 
+      <%= collection_select(:interaction, :representative_id, Representative.all, :id, :fullname, {promp: true}, class: 'form__input') %>
+    </div>
+    <div class="form__row">
+      <%= f.label "Вид услуги : ", class: 'form__label'%> 
+      <%= collection_select(:interaction, :service_id, Service.all, :id, :name, {promp: true}, {class: 'form__input'}) %>
+    </div>
+    <div class="form__row">
+      <label for="interaction_user" class="form__label">Ответственный сотрудник : </label> 
+      <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, {promp: true, selected: current_user.id}, {class: 'form__input'}) %>
+    </div>
+    <div class="form__row">
+      <label for="" class="form__label">Дата взаимодействия:</label>
+        
+      <p>
+        <%= f.label :start_date, 'Начало :' %> <%= f.text_field :start_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
+        <%= f.label :end_date, 'Oкончание :' %> <%= f.text_field :end_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
+      </p>
+    </div>  
+    <div class="form__row form__notes-block">
+      <label for="interaction_notes" class="form__label">Примечание:</label> 
+      <%= f.text_area :notes, class: 'form__textarea' %>
+    </div>
+    <div class="form__row">
+      <%= f.submit "Создать", class: 'button form__button' %>
+    </div>
+  <% end %>
+</div>  
