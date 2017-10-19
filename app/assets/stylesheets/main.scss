@@ -158,3 +158,29 @@ footer {
   text-transform: uppercase;
   background: #581865;
 }
+.card-info__block {
+  width: 100%;
+  margin: 0 auto;
+  // text-align: center;
+}
+.card__title {
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px 0 10px;
+}
+.card__subtitle {
+  font-style: italic;
+}
+.card__row {
+  width: 40%;
+  margin: 8px auto;
+  padding: 0;
+}
+.card__label {
+  width: 220px;
+  display: inline-block;
+  font-weight: bolder;
+}
+.card__row-action {
+  text-align: center;
+}
