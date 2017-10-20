@@ -2,7 +2,8 @@ class InteractionsController < ApplicationController
 
   def index
     @company = Company.find(params[:company_id])
-    @interactions = Interaction.company(@company.id) 
+    @interactions = Interaction.company(@company.id)
+                                .paginate(page: params[:page], per_page: '20')
   end
 
   def new
@@ -33,7 +34,7 @@ class InteractionsController < ApplicationController
     @interaction = Interaction.find(params[:id])
 
     if @interaction.update_attributes(interaction_params)
-      
+
       @interaction.interaction_results.each {|result| result.destroy}
 
       write_interaction_result
@@ -74,19 +75,19 @@ class InteractionsController < ApplicationController
       save_result(company.id, service_cost)
     else
       'Error: Отсутствуют данные для записи результатов взаимодействия'
-    end 
+    end
   end
 
   def define_company
     return 'all' unless params[:all_members][:selected] == '0'
 
     return 'committee' unless params[:interaction][:committee_id].empty?
-    
+
     return 'company' unless params[:interaction][:company_id].empty?
   end
 
   def save_result(company, cost)
-    interaction_result = InteractionResult.new(company_id: company, 
+    interaction_result = InteractionResult.new(company_id: company,
                                                interaction_id: @interaction.id,
                                                mark: cost)
     interaction_result.save

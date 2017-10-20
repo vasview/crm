@@ -1,14 +1,12 @@
-  <h2>Список взаимодействий с компаний : <%= @company.name %></h2>
-  <p>
-    Всего взаимодействий : <%= @interactions.size %>
-  </p>
-  <% for interaction in @interactions %>
-    <div class="interaction__item-row-wrapper">
-      <div class="interaction__item-row">
-        Дата: <%= interaction.start_date.strftime("%d.%m.%Y") %>, 
-        <%= interaction.service.name %>, 
-        <%= interaction.representative.fullname %>, 
-        <%= interaction.user.fullname %>
-      </div>
+<h2>Список взаимодействий с компаний : <%= @company.name %></h2>
+<p>
+  Всего взаимодействий : <%= @interactions.size %>
+</p>
+ <div class="page__inner">
+  <div class="main__section">
+    <%= render 'sidebar' %>
+    <div class="interaction_list__block">
+      <%= render 'interaction_table' %>
     </div>
-  <% end %>
+  </div>
+</div>
