@@ -1,7 +1,7 @@
 <div class="sidebar__section">
   <div class="sidebar__filter">
     <h3 class="filter__title">Филтровать</h3>
-    <%= form_tag company_filters_path, id: "company_filter_form", method: :post, remote: true do %>
+    <%= form_tag company_filters_path, id: "company_filter_form", class: "filter_form", method: :post, remote: true do %>
       <p>
         <label for="category_filter">По категории : </label>
         <%= collection_select(:filter, :category, Category.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'category_filter_select') %>
@@ -12,7 +12,7 @@
         <span class="filter__checkbox-row">
           <%= check_box("filter", "colors", {:multiple => true}, color.downcase, nil) %>
           <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
-        </span>  
+        </span>
         <% end %>
       </p>
       <p>
@@ -20,7 +20,7 @@
         <span class="filter__checkbox-row">
           <%= radio_button_tag("filter[date]", "1-6 month") %>
           <%= label_tag "filter_date_1-6_month", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>
-        </span>  
+        </span>
         <span class="filter__checkbox-row">
           <%= radio_button_tag("filter[date]", "6-12 month") %>
           <%= label_tag "filter_date_6-12_month", 'II полугодие', class: "checkbox__label-date filter__checkbox-label" %>
@@ -35,21 +35,21 @@
         </span>
         <span class="filter__checkbox-row filter__datepicker-row">
           <input name="filter[period]" class="datepicker-here filter__input-period" data-range="true" data-multiple-dates-separator=" - " data-clear-button="true" data-auto-close="true" data-position="top left">
-        </span>   
+        </span>
       </p>
       <%= submit_tag 'Применить', class: "filter__button filter__btn-submit" %>
       <%= submit_tag 'Сбросить', type: :reset, class: "filter__button filter__btn-cancel" %>
-    <% end %>  
+    <% end %>
   </div>
   <div class="sidebar__legend">
     <h3 class="filter__title">Легенда</h3>
     <div class="legend__row">
       <h4 class="legend__title"><span class="legend__result-red"></span>Результат взаимодействия менее 1</h4>
     </div>
-    <div class="legend__row">  
+    <div class="legend__row">
       <h4 class="legend__title"><span class="legend__result-yellow"></span>Результат взаимодействия от 1 до 4 </h4>
     </div>
-    <div class="legend__row">  
+    <div class="legend__row">
       <h4 class="legend__title"><span class="legend__result-green"></span>Результат взаимодействия более 4</h4>
     </div>
   </div>

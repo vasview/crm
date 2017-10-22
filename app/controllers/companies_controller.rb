@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
- 
+  include FilterDates
+
   def new
     @company = Company.new
     @executive = @company.executives.build
@@ -10,7 +11,7 @@ class CompaniesController < ApplicationController
     @companies = Company.status('active').all
 
     score_companies(@companies)
-    
+
     @corporate_members = get_corporate_members
     @associates_members = get_accossiates_members
     @honarable_members = get_honarable_members
@@ -67,41 +68,16 @@ class CompaniesController < ApplicationController
   end
 
   def get_filtered_companies
-    filter_period = get_filtered_period
+    filter_period = get_filtered_period(filter_params)
 
     @companies = Company.status('active').filter(period: filter_period).filter(params[:filter].slice(:category))
-    
+
     score_companies(@companies)
-    
-    if color_filters.present? 
+
+    if color_filters.present?
      @companies = filter_by_colors(@companies, color_filters)
     end
-    
-  end
 
-  def get_filtered_period
-    filtered_period = []
-
-    case date_filter
-      when '1-6 month'
-        start_day = DateTime.now().beginning_of_year
-        end_day = start_day + 6.month - 1.day
-      when '6-12 month'
-        end_day = DateTime.now().end_of_year
-        start_day = end_day - 6.month + 1.day
-      when '12 month'
-        start_day = DateTime.now().beginning_of_year
-        end_day = DateTime.now().end_of_year
-      when 'period'
-        period = period_filter.split(' - ')
-        start_day = Date.parse(period.first)
-        end_day = Date.parse(period.last)
-      else
-        start_day = default_start_day
-        end_day = default_end_day
-    end
-
-    filtered_period = [start_day, end_day]
   end
 
   private
@@ -127,30 +103,6 @@ class CompaniesController < ApplicationController
 
   def color_filters
     params[:filter][:colors]
-  end
-
-  def period_filter
-    params[:filter][:period] 
-  end
-
-  def date_filter
-    params[:filter][:date]
-  end
-
-  def default_end_day
-    if DateTime.now().month <= 6
-      end_day = DateTime.now().beginning_of_year + 6.month - 1.day
-    else 
-      end_day = DateTime.now().end_of_year
-    end  
-  end
-
-  def default_start_day
-    if DateTime.now().month <= 6
-      start_day = DateTime.now().beginning_of_year
-    else 
-       start_day = DateTime.now().end_of_year - 6.month + 1.day
-    end  
   end
 
   def score_companies(companies)
