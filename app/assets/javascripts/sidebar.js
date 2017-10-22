@@ -1,9 +1,11 @@
-$(document).on('turbolinks:load', function() { 
-  var $companyFilterForm = $('#company_filter_form');
+$(document).on('turbolinks:load turbolinks:render', function() {
+  var $companyFilterForm = $('.filter_form');
   var $periodRadioButtons = $companyFilterForm.find("input[type='radio']");
   var $submitButton = $companyFilterForm.find('.filter__btn-submit');
   var $cancelButton = $companyFilterForm.find('.filter__btn-cancel');
-  
+
+  $('input[name="filter[period]"]').data('datepicker');
+
   $($periodRadioButtons).on('change', function() {
     var $filterInputPeriod = $('.filter__input-period')
 
@@ -24,4 +26,4 @@ $(document).on('turbolinks:load', function() {
     $submitButton.click();
   });
 
-});  
+});

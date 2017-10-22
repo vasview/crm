@@ -5,15 +5,16 @@ Rails.application.routes.draw do
 
   resources :representatives
 
-  resources :companies do 
-    get 'interactions', to: 'interactions#index'
+  resources :companies do
+    get 'interactions', to: 'interactions#one_company_interactions'
   end
-  
+
   post 'company_filters', to: 'companies#get_filtered_companies'
   post 'representative_filters', to: 'representatives#get_filtered_representatives'
-  
+  post 'interaction_filters', to: 'interactions#get_filtered_interactions'
+
   resources :users
 
-  resources :interactions, only: [:new, :create, :show, :edit, :update]
+  resources :interactions, except: [:destroy]
 
 end

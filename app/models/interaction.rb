@@ -11,4 +11,6 @@ class Interaction < ApplicationRecord
 
   has_many :interaction_results
 
+  self.per_page = 20
+
 end

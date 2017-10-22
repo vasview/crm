@@ -1,9 +1,8 @@
 class InteractionsController < ApplicationController
+  include FilterDates
 
   def index
-    @company = Company.find(params[:company_id])
-    @interactions = Interaction.company(@company.id)
-                                .paginate(page: params[:page], per_page: '20')
+    @interactions = Interaction.paginate(page: params[:page])
   end
 
   def new
@@ -45,6 +44,17 @@ class InteractionsController < ApplicationController
     end
   end
 
+  def one_company_interactions
+    @company = Company.find(params[:company_id])
+    @interactions = Interaction.company(@company.id)
+                                .paginate(page: params[:page])
+  end
+
+  def get_filtered_interactions
+    filter_period = get_filtered_period(filter_params)
+    binding.pry
+  end
+
   private
 
   def interaction_params
@@ -52,6 +62,10 @@ class InteractionsController < ApplicationController
                                        :company_id, :representative_id,
                                        :service_id, :user_id, :notes,
                                        :committee_id, :category_id)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:company, :service, :date, :period, :user)
   end
 
   def write_interaction_result

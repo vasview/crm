@@ -2,10 +2,10 @@
   <div class="logo"><%= link_to image_tag('logo_ru.png', height: '55'), root_path %></div>
   <div class="navbar">
     <ul class="menu">
-      <li class='menu__item'><%= link_to 'Главная', root_path, class: 'menu__item-link' %></li>
+      <li class='menu__item'><%= link_to 'Главная', root_path, class: 'menu__item-link', data: { 'turbolinks': 'false' } %></li>
       <% if user_signed_in? %>
         <li class='menu__item'><%= link_to 'Добавить компанию', new_company_path, class: 'menu__item-link' %></li>
-        <li class='menu__item'><%= link_to 'Новое взаимодействие', new_interaction_path, class: 'menu__item-link' %></li>
+        <li class='menu__item'><%= link_to 'Взаимодействия', interactions_path, class: 'menu__item-link', data: { 'turbolinks': 'false' } %></li>
       <% end %>
       <li class='menu__item'><%= link_to 'Представители', representatives_path, class: 'menu__item-link' %></li>
       <% if user_signed_in? %>
@@ -13,7 +13,7 @@
       <% else %>
         <li class='menu__item'><%= link_to 'Войти', new_user_session_path, class: 'menu__item-link' %></li>
         <li class='menu__item'><a href="#" class="menu__item-link">Регистрация</a></li>
-      <% end %>  
+      <% end %>
     </ul>
   </div>
 </header>
