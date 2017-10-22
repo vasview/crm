@@ -11,8 +11,8 @@
     <tr class="table__item-row" data-link="<%= interaction_path(interaction.id) %>" data-turbolinks="false">
       <td class="table__item"><%= interaction.start_date.strftime("%d.%m.%Y") %></td>
       <td class="table__item"><%= interaction.service.name %></td>
-      <td class="table__item"><%= interaction.representative.fullname %></td>
-      <td class="table__item"><%= interaction.company.name %></td>
+      <td class="table__item"><%= interaction.representative.fullname if interaction.representative.present? %></td>
+      <td class="table__item"><%= interaction.company.name if interaction.company.present? %></td>
       <td class="table__item"><%= interaction.user.fullname %></td>
     </tr>
     <% end %>

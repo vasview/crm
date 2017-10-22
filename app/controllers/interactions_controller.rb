@@ -45,14 +45,19 @@ class InteractionsController < ApplicationController
   end
 
   def one_company_interactions
+    filter_period = get_filtered_period(filter_params)
     @company = Company.find(params[:company_id])
     @interactions = Interaction.company(@company.id)
+                               .filter(period: filter_period)
                                 .paginate(page: params[:page])
   end
 
   def get_filtered_interactions
     filter_period = get_filtered_period(filter_params)
-    binding.pry
+    # binding.pry
+    @interactions = Interaction.filter(period: filter_period)
+                                .filter(filter_params.slice(:company, :service, :user))
+                                .paginate(page: params[:page])
   end
 
   private
@@ -65,7 +70,7 @@ class InteractionsController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:company, :service, :date, :period, :user)
+    {date: ''} || params.require(:filter).permit(:company, :service, :date, :period, :user)
   end
 
   def write_interaction_result
@@ -95,9 +100,9 @@ class InteractionsController < ApplicationController
   def define_company
     return 'all' unless params[:all_members][:selected] == '0'
 
-    return 'committee' unless params[:interaction][:committee_id].empty?
+    return 'committee' unless params[:interaction][:committee_id].nil?
 
-    return 'company' unless params[:interaction][:company_id].empty?
+    return 'company' unless params[:interaction][:company_id].nil?
   end
 
   def save_result(company, cost)

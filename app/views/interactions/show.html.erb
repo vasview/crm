@@ -14,7 +14,7 @@
   </p>
 
   <p>
-    <label for="interaction_representative_name"> ФИО представителя : <%= Representative.find(@interaction.representative_id).fullname %>
+    <label for="interaction_representative_name"> ФИО представителя : <%= Representative.find(@interaction.representative_id).fullname if @interaction.representative_id.present? %>
   </p>
   <p>
     <label for="interaction_service">Вид услуги : </label> <%= Service.find(@interaction.service_id).name %>

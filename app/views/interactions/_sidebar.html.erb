@@ -2,10 +2,15 @@
   <div class="sidebar__filter">
     <h3 class="filter__title">Филтровать</h3>
     <%= form_tag interaction_filters_path, id: "interaction_filter_form", class: "filter_form", method: :post, remote: true do %>
-      <p>
-        <label for="company_filter">По компании : </label>
-        <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select filter_select') %>
-      </p>
+      <% unless params[:company_id].present? %>
+        <p>
+          <label for="company_filter">По компании : </label>
+          <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select filter_select') %>
+        </p>
+      <% else %>
+        <input type="hidden" name='filter[company]' value="<%= params[:company_id] %>" >
+        <input type="hidden" name="company_id" value="<%= params[:company_id] %>" >
+      <% end %>
       <p>
         <label for="service_filter">По услуге : </label>
         <%= collection_select(:filter, :service, Service.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'service_filter_select filter_select') %>

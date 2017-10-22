@@ -1,6 +1,10 @@
 class Interaction < ApplicationRecord
+  include Filterable
+
   scope :company, -> (company_id) { where company_id: company_id }
-  scope :period, -> (period) { where created_at: period.firt..period.last }
+  scope :period, -> (period) { where start_date: period.first..period.last }
+  scope :service, -> (service_id) { where service_id: service_id }
+  scope :user, -> (user_id) { where user_id: user_id }
 
   belongs_to :company, optional: true
   belongs_to :representative, optional: true
