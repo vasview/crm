@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
   include FilterDates
 
+  # before_action :set_filter_period, only: [:index]
+
   def new
     @company = Company.new
     @executive = @company.executives.build
@@ -9,6 +11,8 @@ class CompaniesController < ApplicationController
 
   def index
     @companies = Company.status('active').all
+
+    set_filter_period
 
     score_companies(@companies)
 
@@ -68,9 +72,9 @@ class CompaniesController < ApplicationController
   end
 
   def get_filtered_companies
-    filter_period = get_filtered_period(filter_params)
+    set_filter_period
 
-    @companies = Company.status('active').filter(period: filter_period).filter(params[:filter].slice(:category))
+    @companies = Company.status('active').filter(period: @filter_period).filter(params[:filter].slice(:category))
 
     score_companies(@companies)
 
@@ -81,6 +85,10 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+  def set_filter_period
+    @filter_period = get_filtered_period(filter_params)
+  end
 
   def company_params
     params.require(:company).permit(:id, :name, :address,
@@ -98,7 +106,7 @@ class CompaniesController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:category, :date, :period, colors: [])
+    {period: ''} || params.require(:filter).permit(:category, :date, :period, colors: [])
   end
 
   def color_filters
@@ -116,7 +124,8 @@ class CompaniesController < ApplicationController
 
   def get_scores(company)
     marks = []
-    company.interaction_results.map{|result| marks << result.mark }
+    interaction_results = company.interaction_results.period(@filter_period)
+    interaction_results.map{|result| marks << result.mark }
     total = marks.inject(0, :+)
   end
 
