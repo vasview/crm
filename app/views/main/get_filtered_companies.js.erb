@@ -1,7 +1,7 @@
 var $companyTable = $('.company__table');
-var company_item;
+var companies;
 
 $companyTable.html('');
 
-company_item = '<%= j render "main/company_item" %>';
-$companyTable.append(company_item);
+companies = '<%= j render "main/companies" %>';
+$companyTable.append(companies);

@@ -1,4 +1,4 @@
-<% for company in @companies %>
+<% @companies.each do |company| %>
   <div class="company__item-row-wrapper">
     <%= link_to company_interactions_path(company.id), class: 'company__item-link' do %>
       <div class="company__item-row company__item-<%= company.color %>" >
