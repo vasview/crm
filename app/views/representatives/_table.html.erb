@@ -1,0 +1,11 @@
+<table class="representative__table">
+  <tr class="table__row-header">
+    <th>ФИО</th>
+    <th>Компания</th>
+    <th>Должность</th>
+    <th>Телефон</th>
+  </tr>
+  <% @representatives.each do |representative| %>
+    <%= render partial: 'representative', locals: { representative: representative} %>
+  <% end %>
+</table>
