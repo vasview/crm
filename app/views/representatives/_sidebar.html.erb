@@ -11,12 +11,12 @@
         <%= collection_select(:filter, :job, JobPosition.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'job_filter_select', style: 'width: 160px;') %>
       </p>
       <h3 class="filter__title">Поиск</h3>
-      
+
       <p>
         <input type="text" name="filter[search]" class="search" style="width: 160px;">
       </p>
       <%= submit_tag 'Применить', class: "filter__button filter__btn-submit" %>
       <%= submit_tag 'Сбросить', type: :reset, class: "filter__button filter__btn-cancel" %>
-    <% end %>  
+    <% end %>
   </div>
 </div>

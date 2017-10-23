@@ -22,7 +22,7 @@ class CompaniesController < ApplicationController
   # end
 
   def index
-    @active_companies = Company.status('active').all
+    @active_companies = Company.status('active').paginate(page: params[:page], per_page: "20")
     @inactive_companies = Company.status('inactive').all
     @corporate_members = get_corporate_members
     @associates_members = get_accossiates_members

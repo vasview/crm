@@ -1,0 +1,11 @@
+<table class="company__table">
+  <tr class="table__row-header">
+    <th>Название</th>
+    <th>Категория</th>
+    <th>ФИО руководителя</th>
+    <th>Дата вступления</th>
+  </tr>
+  <% @active_companies.each do |company| %>
+    <%= render partial: 'company', locals: { company: company} %>
+  <% end %>
+</table>

@@ -1,25 +1,20 @@
-  <h2>Список компаний</h2>
-  <p>
-    Всего компаний : <%= @active_companies.size %> из них :
-    <span>корпоративных членов : <%= @corporate_members %>, </span>
-    <span>ассоциативных членов : <%= @associates_members %>, </span>
-    <span>почетных членов : <%= @honarable_members %></span>
-  </p>
-  <div class="page__inner">
-    <div class="main__section">
-      <%#= render 'sidebar' %>
-      <div class="company-list__section">
-        <div class="company__table-header">
-          <div class="company__item-header">
-            <span class="company__item-name">Название</span>
-            <span class="company__item-category">Категория</span>
-            <span class="company__item-interaction_result">ФИО руководителя</span>
-          </div>
-          <div class="company__item-action-header">Паспорт</div>
-        </div>
-        <div class="company__table">
-          <%= render partial: 'companies/company', locals: {companies: @active_companies } %>
+<h2>Список компаний</h2>
+<p>
+  Всего компаний : <%= @active_companies.size %> из них :
+  <span>корпоративных членов : <%= @corporate_members %>, </span>
+  <span>ассоциативных членов : <%= @associates_members %>, </span>
+  <span>почетных членов : <%= @honarable_members %></span>
+</p>
+<div class="page__inner">
+  <div class="main__section">
+    <%= render 'sidebar' %>
+    <div class="company-list__section">
+      <div class="table__wrapper">
+        <%= render partial: 'table' %>
       </div>
+       <div class="digg_pagination pagination__block">
+        <%= will_paginate @active_companies %>
       </div>
     </div>
   </div>
+</div>
