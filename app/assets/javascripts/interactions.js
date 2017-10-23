@@ -41,4 +41,7 @@ $(document).on('turbolinks:load',function() {
     $interactionEndDate.val(enteredDate);
   });
 
+  $(document).on('click', "tr[data-link]", function() {
+    window.location = $(this).data("link")
+  });
 });

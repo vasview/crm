@@ -54,7 +54,7 @@ class InteractionsController < ApplicationController
 
   def get_filtered_interactions
     filter_period = get_filtered_period(filter_params)
-    # binding.pry
+
     @interactions = Interaction.filter(period: filter_period)
                                 .filter(filter_params.slice(:company, :service, :user))
                                 .paginate(page: params[:page])
@@ -70,7 +70,8 @@ class InteractionsController < ApplicationController
   end
 
   def filter_params
-    {date: ''} || params.require(:filter).permit(:company, :service, :date, :period, :user)
+    return {period: ''} if params[:filter].nil?
+    params.require(:filter).permit(:company, :service, :date, :period, :user)
   end
 
   def write_interaction_result
