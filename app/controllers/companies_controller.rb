@@ -9,13 +9,21 @@ class CompaniesController < ApplicationController
     @representative = @executive.build_representative
   end
 
+  # def index
+  #   @companies = Company.status('active').all
+
+  #   set_filter_period
+
+  #   score_companies(@companies)
+
+  #   @corporate_members = get_corporate_members
+  #   @associates_members = get_accossiates_members
+  #   @honarable_members = get_honarable_members
+  # end
+
   def index
-    @companies = Company.status('active').all
-
-    set_filter_period
-
-    score_companies(@companies)
-
+    @active_companies = Company.status('active').all
+    @inactive_companies = Company.status('inactive').all
     @corporate_members = get_corporate_members
     @associates_members = get_accossiates_members
     @honarable_members = get_honarable_members
@@ -106,7 +114,8 @@ class CompaniesController < ApplicationController
   end
 
   def filter_params
-    {period: ''} || params.require(:filter).permit(:category, :date, :period, colors: [])
+    return {period: ''} if params[:filter].nil?
+    params.require(:filter).permit(:category, :date, :period, colors: [])
   end
 
   def color_filters

@@ -1,0 +1,11 @@
+<% for company in companies %>
+  <div class="company__item-row-wrapper">
+    <%= link_to company_path(company.id), class: 'company__item-link' do %>
+      <div class="company__item-row company__item-<%= company.color %>" >
+        <span class="company__item-name"><%= company.name %></span>
+        <span class="company__item-category"><%= company.category.title %> </span>
+        <span class="company__item-interaction_result"><%= company.executives.first.representative.fullname %></span>
+      </div>
+    <% end %>
+  </div>
+<% end %>

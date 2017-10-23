@@ -4,7 +4,7 @@
     <ul class="menu">
       <li class='menu__item'><%= link_to 'Главная', root_path, class: 'menu__item-link', data: { 'turbolinks': 'false' } %></li>
       <% if user_signed_in? %>
-        <li class='menu__item'><%= link_to 'Добавить компанию', new_company_path, class: 'menu__item-link' %></li>
+        <li class='menu__item'><%= link_to 'Компании', companies_path, class: 'menu__item-link' %></li>
         <li class='menu__item'><%= link_to 'Взаимодействия', interactions_path, class: 'menu__item-link', data: { 'turbolinks': 'false' } %></li>
       <% end %>
       <li class='menu__item'><%= link_to 'Представители', representatives_path, class: 'menu__item-link' %></li>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'companies#index'
+  # root 'companies#index'
+  root 'main#index'
 
   resources :representatives
 
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
     get 'interactions', to: 'interactions#one_company_interactions'
   end
 
-  post 'company_filters', to: 'companies#get_filtered_companies'
+  post 'company_filters', to: 'main#get_filtered_companies'
   post 'representative_filters', to: 'representatives#get_filtered_representatives'
   post 'interaction_filters', to: 'interactions#get_filtered_interactions'
 
