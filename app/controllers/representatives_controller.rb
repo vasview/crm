@@ -69,10 +69,10 @@ class RepresentativesController < ApplicationController
     redirect_to representatives_path, notice: "Карточка представителя компании удалена."
   end
 
-  def get_filtered_representatives
+  def filter_representatives
     @representatives = Representative.filter(params[:filter].slice(:company, :job, :search))
                                       .paginate(page: params[:page])
-  end  
+  end
 
   private
 
