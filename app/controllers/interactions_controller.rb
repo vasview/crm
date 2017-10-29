@@ -52,7 +52,7 @@ class InteractionsController < ApplicationController
                                 .paginate(page: params[:page])
   end
 
-  def get_filtered_interactions
+  def filter_interactions
     filter_period = get_filtered_period(filter_params)
 
     @interactions = Interaction.filter(period: filter_period)

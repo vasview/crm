@@ -1,7 +1,7 @@
 <h2>Просмотр взаимодействия</h2>
 
   <p>
-    <%= link_to "На главную", root_path %>
+    <%= link_to "Назад", :back %>
   </p>
   <p>
     <%= label :category_id, 'Категория членов :' %> <%= Category.find(@interaction.category_id).title unless @interaction.category_id.blank?%>

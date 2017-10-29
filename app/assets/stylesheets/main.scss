@@ -187,11 +187,113 @@ footer {
 .card__row-action {
   text-align: center;
 }
+.table__wrapper {
+  margin-bottom: 10px;
+}
 .general__table {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid #94AABD;
 }
+.table__item-row,
+.table__item {
+  border: 1px solid #94AABD;
+}
 .table__text-center {
   text-align: center;
 }
+.table__row-header {
+  height: 25px;
+}
+.table__item {
+  padding: 3px 10px;
+}
+.table__item-row:hover {
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.form__title {
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px 0 10px;
+}
+.form__wrapper {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+.form__row {
+  width: 100%;
+  margin-bottom: 5px;
+}
+.form__label {
+  width: 170px;
+  display: inline-block;
+  font-weight: bolder;
+  text-align: left;
+}
+.form__input {
+  width: 300px;
+}
+.form__textarea {
+  width: 300px;
+  height: 100px;
+  vertical-align: middle;
+}
+.form__button {
+  width: 300px;
+  border-radius: 6px;
+  height: 30px;
+}
+
+.pagination__block {
+  float: right;
+}
+.digg_pagination {
+  background: white;
+  cursor: default;
+  /* self-clearing method: */ }
+  .digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+  .digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+  .digg_pagination .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }

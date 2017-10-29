@@ -1,5 +1,5 @@
 <div class="table__wrapper">
-  <table class="interaction__table">
+  <table class="general__table interaction__table">
     <tr class="table__row-header">
       <th>Дата взаимодействия</th>
       <th>Название услуги</th>
@@ -7,7 +7,7 @@
       <th>Название компании</th>
       <th>ФИО сотрудника</th>
     </tr>
-    <% for interaction in @interactions %>
+    <% @interactions.each do |interaction| %>
     <tr class="table__item-row" data-link="<%= interaction_path(interaction.id) %>" data-turbolinks="false">
       <td class="table__item"><%= interaction.start_date.strftime("%d.%m.%Y") %></td>
       <td class="table__item"><%= interaction.service.name %></td>
