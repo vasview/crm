@@ -6,6 +6,7 @@ class Company < ApplicationRecord
   scope :category, -> (category_id) { where category_id: category_id }
   scope :status, -> (status) { where status: status }
   scope :period, -> (period) { where created_at: period.first..period.last }
+  scope :entry_date, -> (entry_date) { where entry_date: entry_date.first..entry_date.last }
 
   belongs_to :category
   belongs_to :industry

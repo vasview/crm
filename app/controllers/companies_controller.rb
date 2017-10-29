@@ -69,10 +69,12 @@ class CompaniesController < ApplicationController
   end
 
   def filter
-    set_filter_period
-
-    @companies = Company.filter(period: @filter_period).filter(params[:filter].slice(:category, :status))
-
+    if params[:filter][:period].present? || params[:filter][:date].present?
+      set_filter_period
+      @companies = Company.filter(entry_date: @filter_period).filter(params[:filter].slice(:category, :status))
+    else
+      @companies = Company.all.filter(params[:filter].slice(:category, :status))
+    end
   end
 
   private
