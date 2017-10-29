@@ -1,19 +1,21 @@
 <div class="sidebar__section">
   <div class="sidebar__filter">
     <h3 class="filter__title">Филтровать</h3>
-    <%= form_tag company_filters_path, id: "company_filter_form", class: "filter_form", method: :post, remote: true do %>
+    <%= form_tag filter_companies_path, id: "company_filter_form", class: "filter_form", method: :post, remote: true do %>
       <p>
         <label for="category_filter">По категории : </label>
         <%= collection_select(:filter, :category, Category.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'category_filter_select') %>
       </p>
       <p>
-        <label for="color_filter">По цвету: </label>
-        <% CompaniesHelper::COMPANY_COLORS.each do |color| %>
+        <label for="status_filter">По статусу: </label>
         <span class="filter__checkbox-row">
-          <%= check_box("filter", "colors", {:multiple => true}, color.downcase, nil) %>
-          <%= label_tag "filter_colors_#{color.downcase}", color, class: "checkbox__label-#{color.downcase} filter__checkbox-label" %>
+          <%= check_box("filter", "status", {:multiple => true}, 'active', nil) %>
+          <%= label_tag "filter_status_active", 'Действующая', class: "checkbox__label-active filter__checkbox-label" %>
         </span>
-        <% end %>
+        <span class="filter__checkbox-row">
+          <%= check_box("filter", "status", {:multiple => true},'inactive', nil) %>
+          <%= label_tag "filter_status_inactive", 'Выбывшая', class: "checkbox__label-active filter__checkbox-label" %>
+        </span>
       </p>
       <p>
         <label for="date_filter">По дате : </label>

@@ -1,9 +1,12 @@
 <h2>Список компаний</h2>
 <p>
-  Всего компаний : <%= @active_companies.size %> из них :
+  Всего активных компаний : <%= @active_companies %> из них :
   <span>корпоративных членов : <%= @corporate_members %>, </span>
   <span>ассоциативных членов : <%= @associates_members %>, </span>
   <span>почетных членов : <%= @honarable_members %></span>
+</p>
+<p>
+  Всего выбывших компаний : <%= @inactive_companies %>
 </p>
 <div class="page__inner">
   <div class="main__section">
@@ -13,7 +16,7 @@
         <%= render partial: 'table' %>
       </div>
        <div class="digg_pagination pagination__block">
-        <%= will_paginate @active_companies %>
+        <%= will_paginate @companies %>
       </div>
     </div>
   </div>
