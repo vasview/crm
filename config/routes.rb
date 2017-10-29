@@ -8,11 +8,12 @@ Rails.application.routes.draw do
 
   resources :companies do
     get 'interactions', to: 'interactions#one_company_interactions'
+    post 'filter', on: :collection
   end
 
-  post 'company_filters', to: 'main#get_filtered_companies'
-  post 'representative_filters', to: 'representatives#get_filtered_representatives'
-  post 'interaction_filters', to: 'interactions#get_filtered_interactions'
+  post 'main/filter_companies', to: 'main#filter_companies'
+  post 'representative_filters', to: 'representatives#filter_representatives'
+  post 'interaction_filters', to: 'interactions#filter_interactions'
 
   resources :users
 
