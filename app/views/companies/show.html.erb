@@ -1,14 +1,17 @@
 <div class="page__inner">
   <div class="card-info__block">
     <p class="back-link__block">
-      <%= link_to "Назад", companies_path, class: 'back-link'%>
-    </p>  
-    <h2 class="card__title">Карточка компании 
+      <%= link_to "Назад", :back, class: 'back-link'%>
+    </p>
+    <h2 class="card__title">Карточка компании
       <span class="card__subtitle">"<%= @company.name %>"</span>
     </h2>
     <div class="card__row">
-      <%= label :category_id, 'Категория членов :', class: 'card__label'%> 
+      <%= label :category_id, 'Категория членов :', class: 'card__label'%>
       <%= Category.find(@company.category_id).title %>
+    </div>
+    <div class="card__row">
+      <%= label :status, 'Статус :', class: 'card__label' %> <%= @company.status == 'active' ? 'Действующий член' : 'Членство пристановлено' %>
     </div>
     <div class="card__row">
       <label for="company_city" class="card__label">Город : </label>
@@ -21,21 +24,21 @@
     <div class="card__row">
       <label for="company_executive_name" class="card__label"> ФИО руководителя : </label>
         <%= @representative.fullname %>
-    </div>    
+    </div>
     <div class="card__row">
         <label for="company_director" class="card__label"> Должность руководителя : </label>
         <%= JobPosition.find(@representative.job_position_id).title %>
     </div>
     <div class="card__row">
-      <label for="company_work_phone" class="card__label">Рабочий телефон : </label> 
+      <label for="company_work_phone" class="card__label">Рабочий телефон : </label>
       <%= @company.work_phone %>
     </div>
     <div class="card__row">
-      <label for="company_mobile_phone" class="card__label">Мобильный телефон : </label> 
+      <label for="company_mobile_phone" class="card__label">Мобильный телефон : </label>
       <%= @company.mobile_phone %>
     </div>
     <div class="card__row">
-      <label for="company_email" class="card__label">Email : </label> 
+      <label for="company_email" class="card__label">Email : </label>
       <%= @company.email %>
     </div>
     <div class="card__row">
@@ -45,6 +48,18 @@
     <div class="card__row">
       <%= label :birthdate, 'День рождения компании :', class: 'card__label' %> <%= @company.birthdate %>
     </div>
+    <% if @company.status == 'active' %>
+      <div class="card__row">
+        <%= label :entry_date, 'Дата вступления :', class: 'card__label' %> <%= @company.entry_date %>
+      </div>
+    <% else %>
+      <div class="card__row">
+        <%= label :entry_date, 'Дата выбытия :', class: 'card__label' %> <%= @company.exit_date %>
+      </div>
+      <div class="card__row">
+        <%= label :entry_date, 'Причина выбытия :', class: 'card__label' %> <%= @company.exit_reason %>
+      </div>
+    <% end %>
     <div class="card__row">
       <label for="company_notes" class="card__label">Примечание : </label> <%= @company.notes %>
     </div>
@@ -53,5 +68,4 @@
       <%= link_to "Удалить", company_path(@company), :confirm => "Are you sure?", :method => :delete %>
     </div>
   </div>
-</div>  
-
+</div>

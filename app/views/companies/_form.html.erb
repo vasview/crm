@@ -1,24 +1,24 @@
 <div class="form__wrapper">
   <%= form_for @company, class: 'company-form' do |f| %>
     <div class="form__row">
-      <%= f.label :category_id, 'Категория членов', class: 'form__label'%> 
-      <%= collection_select(:company, :category_id, Category.all, :id, :title, {promp: true}, {class: 'form__input'}) %>
+      <%= f.label :category_id, 'Категория членов', class: 'form__label'%>
+      <%= collection_select(:company, :category_id, Category.all, :id, :title, { promp: true }, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
-      <%= f.label :name, 'Название', class: 'form__label'%> 
+      <%= f.label :name, 'Название', class: 'form__label'%>
       <%= f.text_field :name, class: 'form__input' %>
     </div>
     <div class="form__row">
       <label for="company_city" class="form__label">Город : </label>
-      <%= collection_select(:company, :city_id, City.all, :id, :name, {promp: true}, {class: 'form__input'}) %>
+      <%= collection_select(:company, :city_id, City.all, :id, :name, {promp: true }, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
-      <label for="company_address" class="form__label">Адрес : </label> 
+      <label for="company_address" class="form__label">Адрес : </label>
       <%= f.text_field :address, class: 'form__input'%>
     </div>
 
     <div class="form__row">
-      <%= f.label "ФИО руководителя: ", class: 'form__label'%> 
+      <%= f.label "ФИО руководителя: ", class: 'form__label'%>
       <%= f.fields_for @executive do |executive_form| %>
       <%#= executive_form.collection_select(:representative_id, Representative.all, :id, :fullname, promp: true) %>
         <%= executive_form.fields_for @representative do |rep_form| %>
@@ -26,36 +26,48 @@
     </div>
     <div class="form__row">
         <%= f.label "Должность руководителя: ", class: 'form__label' %>
-        <%= rep_form.collection_select(:job_position_id, JobPosition.all, :id, :title, {promp: true}, {class: 'form__input'} ) %>
+        <%= rep_form.collection_select(:job_position_id, JobPosition.all, :id, :title, { promp: true }, {class: 'form__input'} ) %>
         <% end %>
       </div>
     <% end %>
     <div class="form__row">
-      <label for="company_work_phone" class="form__label">Рабочий телефон :</label> 
-      <%= f.text_field :work_phone, {type: 'tel', class: 'form__input' } %>
+      <label for="company_work_phone" class="form__label">Рабочий телефон :</label>
+      <%= f.text_field :work_phone, { type: 'tel', class: 'form__input' } %>
     </div>
     <div class="form__row">
       <label for="company_mobile_phone" class="form__label">Мобильный телефон :</label>
-      <%= f.text_field :mobile_phone , {type: 'tel', class: 'form__input' } %>
+      <%= f.text_field :mobile_phone , { type: 'tel', class: 'form__input' } %>
     </div>
     <div class="form__row">
-      <label for="company_email" class="form__label">Email:</label> 
+      <label for="company_email" class="form__label">Email:</label>
       <%= f.text_field :email, {type: 'email', class: 'form__input' } %>
     </div>
     <div class="form__row">
       <label for="company_industry" class="form__label">Сфера деятельности : </label>
-      <%= collection_select(:company, :industry_id, Industry.all, :id, :title, {promp: true}, {class: 'form__input'}) %>
+      <%= collection_select(:company, :industry_id, Industry.all, :id, :title, { promp: true }, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
-      <%= f.label :birthdate, 'День рождения компании :', class: 'form__label'%> 
-      <%= f.text_field :birthdate, {type: 'date', class: 'form__input' } %>
+      <%= f.label :birthdate, 'День рождения компании :', class: 'form__label'%>
+      <%= f.text_field :birthdate, { type: 'date', class: 'form__input' } %>
     </div>
     <div class="form__row">
-      <label for="status" class="form__label">Статус компании :</label> 
+      <label for="status" class="form__label">Статус компании :</label>
       <span class="form__radio-group">
-        <%= radio_button('company', 'status', 'active', {class: 'company__status'}) %> <label for="company_status_active">Активна</label>
-        <%= radio_button('company', 'status', 'inactive', {class: 'company__status'}) %> <label for="company_status_inactive">Неактивна</label>
+        <%= radio_button('company', 'status', 'active', { class: 'company__status' }) %> <label for="company_status_active">Активна</label>
+        <%= radio_button('company', 'status', 'inactive', { class: 'company__status' }) %> <label for="company_status_inactive">Неактивна</label>
       </span>
+    </div>
+    <div class="form__row">
+      <%= f.label :entry_date, "Дата вступления :", class: 'form__label' %>
+      <%= f.text_field :entry_date, { type: 'date', class: 'form__input' } %>
+    </div>
+     <div class="form__row">
+      <%= f.label :exit_date, "Дата выбытия :", class: 'form__label' %>
+      <%= f.text_field :exit_date, { type: 'date', class: 'form__input' } %>
+    </div>
+    <div class="form__row">
+      <%= f.label :exit_reason, "Причина выбытия :", class: 'form__label' %>
+      <%= f.text_field :exit_reason, { type: 'text', class: 'form__input' } %>
     </div>
     <div class="form__row form__notes-block">
       <label for="company_notes" class="form__label">Примечание:</label>
@@ -63,6 +75,6 @@
     </div>
     <div class="form__row">
       <%= f.submit "Создать", class: 'button form__button' %>
-    </div>  
+    </div>
   <% end %>
 </div>

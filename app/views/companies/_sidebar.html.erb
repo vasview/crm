@@ -7,7 +7,7 @@
         <%= collection_select(:filter, :category, Category.all, :id, :title, {include_blank: 'Все'}, promp: true, class: 'category_filter_select') %>
       </p>
       <p>
-        <label for="status_filter">По статусу: </label>
+        <label for="status_filter">По статусу : </label>
         <span class="filter__checkbox-row">
           <%= check_box("filter", "status", {:multiple => true}, 'active', nil) %>
           <%= label_tag "filter_status_active", 'Действующая', class: "checkbox__label-active filter__checkbox-label" %>
@@ -18,7 +18,7 @@
         </span>
       </p>
       <p>
-        <label for="date_filter">По дате : </label>
+        <label for="date_filter">По дате вступления : </label>
         <span class="filter__checkbox-row">
           <%= radio_button_tag("filter[date]", "1-6 month") %>
           <%= label_tag "filter_date_1-6_month", 'I полугодие', class: "checkbox__label-date filter__checkbox-label" %>

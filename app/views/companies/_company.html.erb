@@ -2,6 +2,6 @@
   <td class="table__item"><%= company.name %></td>
   <td class="table__item"><%= company.category.title %></td>
   <td class="table__item"><%= company.executives.first.representative.fullname %></td>
-  <td class="table__item"><%= company.created_at %></td>
+  <td class="table__item"><%= company.status == 'active' ? company.entry_date : company.exit_date %></td>
   <td class="table__item table__text-center"><%= image_tag("icons/icon_lamp_#{company.status}.png", size: '24x24') %></td>
 </tr>

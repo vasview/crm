@@ -86,7 +86,8 @@ class CompaniesController < ApplicationController
                                     :work_phone, :mobile_phone,
                                     :email, :birthdate, :status,
                                     :category_id, :industry_id,
-                                    :city_id, :notes)
+                                    :city_id, :entry_date,
+                                    :exit_date, :exit_reason, :notes)
   end
 
   def representative_params
