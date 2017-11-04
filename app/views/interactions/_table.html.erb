@@ -19,5 +19,14 @@
   </table>
 </div>
 <div class="digg_pagination pagination__block">
-  <%= will_paginate @interactions %>
+  <%= will_paginate @interactions,
+    params: {
+      filter: {
+        company: params[:filter]&.fetch(:company, ''),
+        service: params[:filter]&.fetch(:service, ''),
+        user: params[:filter]&.fetch(:user, ''),
+        date: params[:filter]&.fetch(:date, ''),
+        period: params[:filter]&.fetch(:period, '')
+      }
+    } %>
 </div>

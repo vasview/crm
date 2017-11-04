@@ -16,10 +16,11 @@ Rails.application.routes.draw do
   end
 
   post 'main/filter_companies', to: 'main#filter_companies'
-  post 'interaction_filters', to: 'interactions#filter_interactions'
 
   resources :users
 
-  resources :interactions, except: [:destroy]
-
+  resources :interactions, except: [:destroy] do
+    post 'filter', on: :collection
+    get 'filter', on: :collection
+  end
 end

@@ -1,7 +1,7 @@
 <div class="sidebar__section">
   <div class="sidebar__filter">
     <h3 class="filter__title">Филтровать</h3>
-    <%= form_tag interaction_filters_path, id: "interaction_filter_form", class: "filter_form", method: :post, remote: true do %>
+    <%= form_tag filter_interactions_path, id: "interaction_filter_form", class: "filter_form", method: :post, remote: true, data: { 'turbolinks': 'false' } do %>
       <% unless params[:company_id].present? %>
         <p>
           <label for="company_filter">По компании : </label>

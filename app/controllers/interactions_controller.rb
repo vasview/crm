@@ -1,8 +1,14 @@
 class InteractionsController < ApplicationController
   include FilterDates
 
+  before_action :set_filter_period, only: [:index, :filter, :one_company_interactions]
+
   def index
-    @interactions = Interaction.paginate(page: params[:page])
+    @interactions_count = Interaction.filter(period: @filter_period)
+                                     .size
+
+    @interactions = Interaction.order('start_date DESC')
+                               .paginate(page: params[:page])
   end
 
   def new
@@ -45,20 +51,29 @@ class InteractionsController < ApplicationController
   end
 
   def one_company_interactions
-    filter_period = get_filtered_period(filter_params)
     @company = Company.find(params[:company_id])
+    @interactions_count = Interaction.company(@company.id)
+                                     .filter(period: @filter_period)
+                                     .size
+
     @interactions = Interaction.company(@company.id)
-                               .filter(period: filter_period)
-                                .paginate(page: params[:page])
+                               .filter(period: @filter_period)
+                               .order('start_date DESC')
+                               .paginate(page: params[:page])
+    respond_to do |format|
+      format.html { render 'index' }
+    end
   end
 
-  def filter_interactions
-    binding.pry
-    filter_period = get_filtered_period(filter_params)
+  def filter
+    @interactions_count = Interaction.filter(period: @filter_period)
+                               .filter(filter_params.slice(:company, :service, :user))
+                               .count
 
-    @interactions = Interaction.filter(period: filter_period)
-                                .filter(filter_params.slice(:company, :service, :user))
-                                .paginate(page: params[:page])
+    @interactions = Interaction.filter(period: @filter_period)
+                               .filter(filter_params.slice(:company, :service, :user))
+                               .order('start_date DESC')
+                               .paginate(page: params[:page])
     respond_to do |format|
       format.js
     end
@@ -76,6 +91,10 @@ class InteractionsController < ApplicationController
   def filter_params
     return {period: ''} if params[:filter].nil?
     params.require(:filter).permit(:company, :service, :date, :period, :user)
+  end
+
+  def set_filter_period
+    @filter_period = get_filtered_period(filter_params)
   end
 
   def write_interaction_result

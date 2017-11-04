@@ -1,0 +1,3 @@
+$('.interaction_list__block').html('<%= j render "interactions/table" %>');
+$('.pagination__block a').attr('data-remote', 'true');
+$('.interaction__count').html('<%= @interactions_count %>');

@@ -1,9 +1,13 @@
-<h2>Список взаимодействий с компаниями</h2>
+<% if params[:action] == 'index' %>
+  <h2>Список взаимодействий с компаниями</h2>
+  <p>
+    <%= link_to "Новое взаимодействие", new_interaction_path %>
+  </p>
+<% else %>
+  <h2>Список взаимодействий с компаний : <%= @company.name %></h2>
+<% end %>
 <p>
-  <%= link_to "Новое взаимодействие", new_interaction_path %>
-</p>
-<p>
-  Всего взаимодействий : <%= @interactions.size %>
+  Всего взаимодействий : <span class="interaction__count"><%= @interactions_count %></span>
 </p>
  <div class="page__inner">
   <div class="main__section">
