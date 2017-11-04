@@ -6,7 +6,8 @@ class RepresentativesController < ApplicationController
   end
 
   def index
-    @representatives = Representative.paginate(page: params[:page])
+    @representatives = Representative.order('fullname ASC')
+                                     .paginate(page: params[:page])
   end
 
   def show
@@ -69,9 +70,13 @@ class RepresentativesController < ApplicationController
     redirect_to representatives_path, notice: "Карточка представителя компании удалена."
   end
 
-  def filter_representatives
+  def filter
     @representatives = Representative.filter(params[:filter].slice(:company, :job, :search))
-                                      .paginate(page: params[:page])
+                                     .order('fullname ASC')
+                                     .paginate(page: params[:page])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

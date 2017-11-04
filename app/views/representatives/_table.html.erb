@@ -1,11 +1,23 @@
-<table class="general__table representative__table">
-  <tr class="table__row-header">
-    <th>ФИО</th>
-    <th>Компания</th>
-    <th>Должность</th>
-    <th>Телефон</th>
-  </tr>
-  <% @representatives.each do |representative| %>
-    <%= render partial: 'representative', locals: { representative: representative} %>
-  <% end %>
-</table>
+<div class="table__wrapper">
+  <table class="general__table representative__table">
+    <tr class="table__row-header">
+      <th>ФИО</th>
+      <th>Компания</th>
+      <th>Должность</th>
+      <th>Телефон</th>
+    </tr>
+    <% @representatives.each do |representative| %>
+      <%= render partial: 'representative', locals: { representative: representative} %>
+    <% end %>
+  </table>
+</div>
+<div class="digg_pagination pagination__block">
+  <%= will_paginate @representatives,
+  params: {
+        filter: {
+          company: params[:filter]&.fetch(:company, ''),
+          job: params[:filter]&.fetch(:job, ''),
+          search: params[:filter]&.fetch(:search, '')
+        }
+      } %>
+</div>

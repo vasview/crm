@@ -53,11 +53,15 @@ class InteractionsController < ApplicationController
   end
 
   def filter_interactions
+    binding.pry
     filter_period = get_filtered_period(filter_params)
 
     @interactions = Interaction.filter(period: filter_period)
                                 .filter(filter_params.slice(:company, :service, :user))
                                 .paginate(page: params[:page])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

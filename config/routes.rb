@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   # root 'companies#index'
   root 'main#index'
 
-  resources :representatives
+  resources :representatives do
+    post 'filter', on: :collection
+    get 'filter', on: :collection
+  end
 
   resources :companies do
     get 'interactions', to: 'interactions#one_company_interactions'
@@ -13,7 +16,6 @@ Rails.application.routes.draw do
   end
 
   post 'main/filter_companies', to: 'main#filter_companies'
-  post 'representative_filters', to: 'representatives#filter_representatives'
   post 'interaction_filters', to: 'interactions#filter_interactions'
 
   resources :users

@@ -6,12 +6,7 @@
   <div class="main__section">
     <%= render 'sidebar' %>
     <div class="representative_list__block">
-      <div class="table__wrapper">
-        <%= render partial: 'table' %>
-      </div>
-      <div class="digg_pagination pagination__block">
-        <%= will_paginate @representatives %>
-      </div>
+      <%= render partial: 'table' %>
     </div>
   </div>
 </div>

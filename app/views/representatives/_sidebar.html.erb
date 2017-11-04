@@ -1,7 +1,7 @@
 <div class="sidebar__section">
   <div class="sidebar__filter">
     <h3 class="filter__title">Филтровать</h3>
-    <%= form_tag representative_filters_path, id: "representative_filter_form", method: :post, remote: true do %>
+    <%= form_tag filter_representatives_path, id: "representative_filter_form", method: :post, remote: true do %>
       <p>
         <label for="company_filter">По компании : </label>
         <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select') %>
