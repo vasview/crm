@@ -23,5 +23,5 @@ class Company < ApplicationRecord
     self.status == 'active' ? true : false
   end
 
-  self.per_page = 2
+  self.per_page = 20
 end
