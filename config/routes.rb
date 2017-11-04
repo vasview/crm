@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :companies do
     get 'interactions', to: 'interactions#one_company_interactions'
     post 'filter', on: :collection
+    get 'filter', on: :collection
   end
 
   post 'main/filter_companies', to: 'main#filter_companies'

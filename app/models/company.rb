@@ -5,8 +5,8 @@ class Company < ApplicationRecord
 
   scope :category, -> (category_id) { where category_id: category_id }
   scope :status, -> (status) { where status: status }
-  scope :period, -> (period) { where created_at: period.first..period.last }
   scope :entry_date, -> (entry_date) { where entry_date: entry_date.first..entry_date.last }
+  scope :exit_date, -> (exit_date) { where exit_date: exit_date.first..exit_date.last }
 
   belongs_to :category
   belongs_to :industry
@@ -22,4 +22,6 @@ class Company < ApplicationRecord
   def is_active?
     self.status == 'active' ? true : false
   end
+
+  self.per_page = 2
 end

@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   include FilterDates
 
-  # before_action :set_filter_period, only: [:index]
+  before_action :set_filter_period, only: [:index, :filter]
 
   def new
     @company = Company.new
@@ -10,7 +10,11 @@ class CompaniesController < ApplicationController
   end
 
   def index
-    @companies = Company.all.paginate(page: params[:page], per_page: "20")
+    @companies = Company.filter(entry_date: @filter_period)
+                        .or(Company.filter(exit_date: @filter_period))
+                        .order('name ASC')
+                        .paginate(page: params[:page])
+
     @active_companies = Company.status('active').size
     @inactive_companies = Company.status('inactive').size
     @corporate_members = helpers.get_corporate_members
@@ -69,18 +73,27 @@ class CompaniesController < ApplicationController
   end
 
   def filter
-    if params[:filter][:period].present? || params[:filter][:date].present?
-      set_filter_period
-      @companies = Company.filter(entry_date: @filter_period).filter(params[:filter].slice(:category, :status))
-    else
-      @companies = Company.all.filter(params[:filter].slice(:category, :status))
+    @companies = Company.filter(entry_date: @filter_period)
+                        .or(Company.filter(exit_date: @filter_period))
+                        .order('name ASC')
+                        .filter(params[:filter].slice(:category, :status))
+                        .paginate(page: params[:page])
+
+    respond_to do |format|
+      format.js
     end
   end
 
   private
 
   def set_filter_period
-    @filter_period = get_filtered_period(filter_params)
+    return @filter_period = get_filtered_period(filter_params, "from_very_beginning") if params[:filter].nil?
+
+    if params[:filter][:date].present?
+      @filter_period = get_filtered_period(filter_params)
+    else
+      @filter_period = get_filtered_period(filter_params, "from_very_beginning")
+    end
   end
 
   def company_params
@@ -100,7 +113,7 @@ class CompaniesController < ApplicationController
   end
 
   def filter_params
-    return {period: ''} if params[:filter].nil?
+    return { period: '' } if params[:filter].nil?
     params.require(:filter).permit(:category, :date, :period, :status)
   end
 end

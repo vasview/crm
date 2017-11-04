@@ -1,25 +1,27 @@
 module FilterDates
 
-  def get_filtered_period(params)
+  def get_filtered_period(params, from_very_beginning = false)
     filtered_period = []
 
+    return filtered_period = [DateTime.new(1990,1,1), default_end_day] if from_very_beginning
+
     case date_filter(params)
-      when '1-6 month'
-        start_day = DateTime.now().beginning_of_year
-        end_day = start_day + 6.month - 1.day
-      when '6-12 month'
-        end_day = DateTime.now().end_of_year
-        start_day = end_day - 6.month + 1.day
-      when '12 month'
-        start_day = DateTime.now().beginning_of_year
-        end_day = DateTime.now().end_of_year
-      when 'period'
-        period = period_filter(params).split(' - ')
-        start_day = Date.parse(period.first)
-        end_day = Date.parse(period.last)
-      else
-        start_day = default_start_day
-        end_day = default_end_day
+    when '1-6 month'
+      start_day = DateTime.now().beginning_of_year
+      end_day = start_day + 6.month - 1.day
+    when '6-12 month'
+      end_day = DateTime.now().end_of_year
+      start_day = end_day - 6.month + 1.day
+    when '12 month'
+      start_day = DateTime.now().beginning_of_year
+      end_day = DateTime.now().end_of_year
+    when 'period'
+      period = period_filter(params).split(' - ')
+      start_day = Date.parse(period.first)
+      end_day = Date.parse(period.last)
+    else
+      start_day = default_start_day
+      end_day = default_end_day
     end
 
     filtered_period = [start_day, end_day]

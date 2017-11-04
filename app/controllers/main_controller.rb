@@ -1,10 +1,10 @@
 class MainController < ApplicationController
   include FilterDates
 
+  before_action :set_filter_period
+
   def index
     @companies = Company.status('active').all
-
-    set_filter_period
 
     helpers.score_companies(@companies)
 
@@ -14,9 +14,7 @@ class MainController < ApplicationController
   end
 
   def filter_companies
-    set_filter_period
-
-    @companies = Company.status('active').filter(period: @filter_period).filter(params[:filter].slice(:category))
+    @companies = Company.status('active').filter(params[:filter].slice(:category))
 
     helpers.score_companies(@companies)
 
@@ -32,7 +30,7 @@ class MainController < ApplicationController
   end
 
   def filter_params
-    return {period: ''} if params[:filter].nil?
+    return { period: '' } if params[:filter].nil?
     params.require(:filter).permit(:category, :date, :period, colors: [])
   end
 

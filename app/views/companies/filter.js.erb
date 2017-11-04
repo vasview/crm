@@ -1,7 +1,2 @@
-var $companyTable = $('.table__wrapper');
-var companies;
-
-$companyTable.html('');
-
-companies = '<%= j render "companies/table" %>';
-$companyTable.append(companies);
+$('.company-list__section').html('<%= j render "companies/table" %>');
+$('.pagination__block a').attr('data-remote', 'true');
