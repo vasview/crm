@@ -11,7 +11,7 @@ module MainHelper
   def get_scores(company)
     marks = []
     interaction_results = company.interaction_results.period(@filter_period)
-    interaction_results.map{|result| marks << result.mark }
+    interaction_results.map{ |result| marks << result.mark }
     total = marks.inject(0, :+)
   end
 

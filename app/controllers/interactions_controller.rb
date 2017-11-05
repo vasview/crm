@@ -4,11 +4,11 @@ class InteractionsController < ApplicationController
   before_action :set_filter_period, only: [:index, :filter, :one_company_interactions]
 
   def index
-    @interactions_count = Interaction.filter(period: @filter_period)
-                                     .size
+    @interactions = Interaction.filter(period: @filter_period)
+                               .order('created_at DESC')
 
-    @interactions = Interaction.order('start_date DESC')
-                               .paginate(page: params[:page])
+    @interactions_count = @interactions.count
+    @interactions = @interactions.paginate(page: params[:page])
   end
 
   def new
@@ -23,7 +23,9 @@ class InteractionsController < ApplicationController
     @interaction = Interaction.create(interaction_params)
     if @interaction.save
 
-      write_interaction_result
+      result = WriteInteractionResult.call(params: interaction_params,
+                                           all_members: params[:interaction][:all_members][:selected],
+                                           interaction: @interaction)
 
       redirect_to interaction_path(@interaction)
     else
@@ -40,9 +42,11 @@ class InteractionsController < ApplicationController
 
     if @interaction.update_attributes(interaction_params)
 
-      @interaction.interaction_results.each {|result| result.destroy}
+      @interaction.interaction_results.each { |result| result.destroy }
 
-      write_interaction_result
+      result = WriteInteractionResult.call(params: interaction_params,
+                                           all_members: params[:interaction][:all_members][:selected],
+                                           interaction: @interaction)
 
       redirect_to interaction_path(@interaction)
     else
@@ -52,28 +56,36 @@ class InteractionsController < ApplicationController
 
   def one_company_interactions
     @company = Company.find(params[:company_id])
-    @interactions_count = Interaction.company(@company.id)
-                                     .filter(period: @filter_period)
-                                     .size
 
-    @interactions = Interaction.company(@company.id)
+    @interactions = Interaction.includes(:interaction_results)
+                               .where(interaction_results: {company_id: @company.id})
                                .filter(period: @filter_period)
                                .order('start_date DESC')
-                               .paginate(page: params[:page])
+
+    @interactions_count = @interactions.count
+    @interactions = @interactions.paginate(page: params[:page])
+
     respond_to do |format|
       format.html { render 'index' }
     end
   end
 
   def filter
-    @interactions_count = Interaction.filter(period: @filter_period)
-                               .filter(filter_params.slice(:company, :service, :user))
-                               .count
-
-    @interactions = Interaction.filter(period: @filter_period)
-                               .filter(filter_params.slice(:company, :service, :user))
+    if params[:company_id].present?
+      @interactions = Interaction.includes(:interaction_results)
+                               .where(interaction_results: {company_id: filter_params.fetch(:company)})
+                               .filter(period: @filter_period)
+                               .filter(filter_params.slice(:service, :user))
                                .order('start_date DESC')
-                               .paginate(page: params[:page])
+    else
+      @interactions = Interaction.filter(period: @filter_period)
+                                 .filter(filter_params.slice(:company, :service, :user))
+                                 .order('created_at DESC')
+    end
+
+      @interactions_count = @interactions.count
+      @interactions = @interactions.paginate(page: params[:page])
+
     respond_to do |format|
       format.js
     end
@@ -83,9 +95,9 @@ class InteractionsController < ApplicationController
 
   def interaction_params
     params.require(:interaction).permit(:id, :start_date, :end_date,
-                                       :company_id, :representative_id,
-                                       :service_id, :user_id, :notes,
-                                       :committee_id, :category_id)
+                                        :company_id, :representative_id,
+                                        :service_id, :user_id, :notes,
+                                        :committee_id, :category_id)
   end
 
   def filter_params
@@ -95,44 +107,5 @@ class InteractionsController < ApplicationController
 
   def set_filter_period
     @filter_period = get_filtered_period(filter_params)
-  end
-
-  def write_interaction_result
-    case define_company
-
-    when 'all'
-      companies = Company.all
-      service_cost = Service.find(params[:interaction][:service_id].to_i).cost
-      companies.map{|company| save_result(company.id, service_cost)}
-
-    when 'committee'
-      committee = Committee.find(params[:interaction][:committee_id])
-      service_cost = Service.find(params[:interaction][:service_id].to_i).committee_cost
-
-      representatives = committee.representatives
-      representatives.map{|rep| save_result(rep.company_id, service_cost)}
-
-    when 'company'
-      company = Company.find(params[:interaction][:company_id])
-      service_cost = Service.find(params[:interaction][:service_id].to_i).cost
-      save_result(company.id, service_cost)
-    else
-      'Error: Отсутствуют данные для записи результатов взаимодействия'
-    end
-  end
-
-  def define_company
-    return 'all' unless params[:all_members][:selected] == '0'
-
-    return 'committee' unless params[:interaction][:committee_id].nil?
-
-    return 'company' unless params[:interaction][:company_id].nil?
-  end
-
-  def save_result(company, cost)
-    interaction_result = InteractionResult.new(company_id: company,
-                                               interaction_id: @interaction.id,
-                                               mark: cost)
-    interaction_result.save
   end
 end

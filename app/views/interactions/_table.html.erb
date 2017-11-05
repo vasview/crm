@@ -1,18 +1,31 @@
 <div class="table__wrapper">
   <table class="general__table interaction__table">
     <tr class="table__row-header">
-      <th>Дата взаимодействия</th>
+      <th>Дата</th>
       <th>Название услуги</th>
-      <th>ФИО представителя</th>
-      <th>Название компании</th>
-      <th>ФИО сотрудника</th>
+      <th>Представитель</th>
+      <th>Компания</th>
+      <th>Комитет</th>
+      <th>Сотрудник</th>
     </tr>
     <% @interactions.each do |interaction| %>
     <tr class="table__item-row" data-link="<%= interaction_path(interaction.id) %>" data-turbolinks="false">
       <td class="table__item"><%= interaction.start_date.strftime("%d.%m.%Y") %></td>
       <td class="table__item"><%= interaction.service.name %></td>
       <td class="table__item"><%= interaction.representative.fullname if interaction.representative.present? %></td>
-      <td class="table__item"><%= interaction.company.name if interaction.company.present? %></td>
+      <td class="table__item">
+        <% if interaction.company.nil? && interaction.committee.nil? %>
+          Все компании
+        <% elsif interaction.company.nil? && interaction.committee.present? %>
+          Члены комитета
+        <% else %>
+          <%= interaction.company.name %>
+        <% end %>
+      </td>
+      <td class="table__item">
+        <%= interaction.committee.title if interaction.committee.present? %>
+        <%= interaction.id %>
+      </td>
       <td class="table__item"><%= interaction.user.fullname %></td>
     </tr>
     <% end %>
