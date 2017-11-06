@@ -94,10 +94,31 @@ footer {
   flex: wrap;
   justify-content: space-between;
 }
+.section_title-block {
+  width: 100%;
+}
+.main__title {
+  width: 80%;
+  display: inline-block;
+  margin: 10px 0 0;
+  text-align: center;
+}
+.section__link-add {
+  width: 18%;
+  display: inline-block;
+  text-align: right;
+}
+.count__indicator {
+  margin-left: 20px;
+  margin-top: 5px;
+}
 .sidebar__section {
   width: 15%;
   margin: 0 auto;
   padding: 0;
+}
+.list__section {
+  margin-top: 20px;
 }
 .filter__title {
   margin: 0;

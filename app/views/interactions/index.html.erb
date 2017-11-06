@@ -1,18 +1,20 @@
 <% if params[:action] == 'index' %>
-  <h2>Список взаимодействий с компаниями</h2>
-  <p>
-    <%= link_to "Новое взаимодействие", new_interaction_path %>
-  </p>
+  <div class="section_title-block">
+    <h2 class="main__title">Список взаимодействий с компаниями</h2>
+    <span class="section__link-add"><%= link_to "Новое взаимодействие", new_interaction_path %></span>
+  </div>
 <% else %>
-  <h2>Список взаимодействий с компаний : <%= @company.name %></h2>
+  <div class="section_title-block">
+    <h2 class="main__title">Список взаимодействий с компаний : <%= @company.name %></h2>
+  </div>
 <% end %>
-<p>
+<div class="count__indicator">
   Всего взаимодействий : <span class="interaction__count"><%= @interactions_count %></span>
-</p>
+</div>
  <div class="page__inner">
   <div class="main__section">
     <%= render 'sidebar' %>
-    <div class="interaction_list__block">
+    <div class="interaction_list__block list__section">
       <%= render 'table' %>
     </div>
   </div>

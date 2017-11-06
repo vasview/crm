@@ -1,11 +1,11 @@
-<h1>Список всех представителей</h1>
-<p>
-  <%= link_to "Добавить представителя", new_representative_path %>
-</p>
+<div class="section_title-block">
+  <h2 class="main__title">Список представителей компаний</h2>
+  <span class="section__link-add"><%= link_to "Добавить представителя", new_representative_path %></span>
+</div>
 <div class="page__inner">
   <div class="main__section">
     <%= render 'sidebar' %>
-    <div class="representative_list__block">
+    <div class="representative_list__block list__section">
       <%= render partial: 'table' %>
     </div>
   </div>
