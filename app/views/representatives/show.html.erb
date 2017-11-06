@@ -2,7 +2,7 @@
   <div class="card-info__block">
     <p class="back-link__block">
       <%= link_to "Назад", representatives_path, class: 'back-link' %>
-    </p>  
+    </p>
     <h2 class="card__title">Kарточка представителя компании: </h2>
     <div class="card__row">
       <label for="representative_fullname" class="card__label">ФИО : </label>
@@ -53,4 +53,4 @@
         <%= link_to "Удалить", representative_path(@representative), :confirm => "Вы уверены?", :method => :delete %>
     </div>
   </div>
-</div>  
+</div>

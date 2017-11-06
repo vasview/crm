@@ -1,35 +1,49 @@
-<h2>Просмотр взаимодействия</h2>
-
-  <p>
-    <%= link_to "Назад", :back %>
-  </p>
-  <p>
-    <%= label :category_id, 'Категория членов :' %> <%= Category.find(@interaction.category_id).title unless @interaction.category_id.blank?%>
-  </p>
-  <p>
-    <label for="interaction_city">Компания : </label><%= Company.find(@interaction.company_id).name unless @interaction.company_id.blank? %>
-  </p>
-  <p>
-    <label for="interaction_address">Комитет : </label> <%= Committee.find(@interaction.committee_id).title unless @interaction.committee_id.blank? %>
-  </p>
-
-  <p>
-    <label for="interaction_representative_name"> ФИО представителя : <%= Representative.find(@interaction.representative_id).fullname if @interaction.representative_id.present? %>
-  </p>
-  <p>
-    <label for="interaction_service">Вид услуги : </label> <%= Service.find(@interaction.service_id).name %>
-  </p>
-  <p>
-    <label for="interaction_user">Ответственный сотрудник : </label> <%= User.find(@interaction.user_id).fullname %>
-  </p>
-  <p>
-    <label for="interaction_date">Дата взаимодействия : </label> <%= @interaction.start_date&.strftime("%d.%m.%Y") %> - <%= @interaction.end_date&.strftime("%d.%m.%Y") %>
-  </p>
-  <p>
-    <label for="interaction_notes">Примечание : </label> <%= @interaction.notes %>
-  </p>
-  <p>
-    <%= link_to "Редактировать", edit_interaction_path(@interaction) %>
-  </p>
-
-
+<div class="page__inner">
+  <div class="card-info__block">
+    <p class="back-link__block">
+      <%= link_to "Назад", :back, class: 'back-link' %>
+    </p>
+    <h2 class="card__title">Просмотр взаимодействия</h2>
+    <div class="card__row">
+      <%= label :category_id, 'Категория членов :', class: 'card__label'%>
+      <%= @interaction.category.title unless @interaction.category_id.blank?%>
+    </div>
+    <div class="card__row">
+      <label for="interaction_city" class="card__label">Компания : </label>
+      <% if @interaction.company.nil? && @interaction.committee.nil? %>
+        Все компании
+      <% elsif @interaction.company.nil? && @interaction.committee.present? %>
+        Члены комитета
+      <% else %>
+        <%= @interaction.company.name %>
+      <% end %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_address" class="card__label">Комитет : </label>
+      <%= @interaction.committee.title unless @interaction.committee_id.blank? %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_representative_name" class="card__label">ФИО представителя : </label>
+      <%= @interaction.representative.fullname if @interaction.representative_id.present? %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_service" class="card__label">Вид услуги : </label>
+      <%= @interaction.service.name %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_user" class="card__label">Ответственный сотрудник : </label>
+      <%= @interaction.user.fullname %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_date" class="card__label">Дата взаимодействия : </label>
+      <%= @interaction.start_date&.strftime("%d.%m.%Y") %> - <%= @interaction.end_date&.strftime("%d.%m.%Y") %>
+    </div>
+    <div class="card__row">
+      <label for="interaction_notes" class="card__label">Примечание : </label>
+      <%= @interaction.notes %>
+    </div>
+    <div class="card__row card__row-action">
+      <%= link_to "Редактировать", edit_interaction_path(@interaction) %>
+    </div>
+  </div>
+</div>

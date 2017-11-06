@@ -1,23 +1,23 @@
 <div class="form__wrapper">
   <%= form_for @representative, class: 'representative__form' do |f| %>
     <div class="form__row">
-      <%= f.label :firstname, 'Имя : ', class: 'form__label'%> 
+      <%= f.label :firstname, 'Имя : ', class: 'form__label'%>
       <%= f.text_field :firstname, class: 'form__input'%>
     </div>
     <div class="form__row">
-      <%= f.label :middlename, 'Отчество : ', class: 'form__label' %> 
+      <%= f.label :middlename, 'Отчество : ', class: 'form__label' %>
       <%= f.text_field :middlename, class: 'form__input' %>
     </div>
     <div class="form__row">
-      <%= f.label :lastname, 'Фамилия : ', class: 'form__label' %> 
+      <%= f.label :lastname, 'Фамилия : ', class: 'form__label' %>
       <%= f.text_field :lastname, class: 'form__input' %>
     </div>
     <div class="form__row">
-      <%= f.label :company_id, 'Компания : ', class: 'form__label' %> 
+      <%= f.label :company_id, 'Компания : ', class: 'form__label' %>
       <%= collection_select(:representative,:company_id, Company.all, :id, :name, {promp: true}, {class: 'form__input'} ) %>
     </div>
     <div class="form__row">
-      <%= f.label :job_position_id, 'Должность : ', class: 'form__label' %> 
+      <%= f.label :job_position_id, 'Должность : ', class: 'form__label' %>
       <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, {promp: true}, {class: 'form__input'} ) %>
     </div>
     <div class="form__row">
@@ -42,7 +42,7 @@
       <%= f.label :preferences, 'Предпочтения :', class: 'form__label'%> <%= f.text_field :preferences, class: 'form__input' %>
     </div>
     <div class="form__row">
-      <label for="company_notes" class="form__label">Примечание:</label> 
+      <label for="company_notes" class="form__label">Примечание:</label>
       <%= f.text_area :notes, class: 'form__textarea' %>
     </div>
     <div class="form__row">

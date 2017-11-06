@@ -8,14 +8,14 @@
     </h2>
     <div class="card__row">
       <%= label :category_id, 'Категория членов :', class: 'card__label'%>
-      <%= Category.find(@company.category_id).title %>
+      <%= @company.category.title %>
     </div>
     <div class="card__row">
       <%= label :status, 'Статус :', class: 'card__label' %> <%= @company.status == 'active' ? 'Действующий член' : 'Членство пристановлено' %>
     </div>
     <div class="card__row">
       <label for="company_city" class="card__label">Город : </label>
-      <%= City.find(@company.city_id).name %>
+      <%= @company.city.name %>
     </div>
     <div class="card__row">
       <label for="company_address" class="card__label">Адрес : </label> <%= @company.address %>
@@ -27,7 +27,7 @@
     </div>
     <div class="card__row">
         <label for="company_director" class="card__label"> Должность руководителя : </label>
-        <%= JobPosition.find(@representative.job_position_id).title %>
+        <%= @representative.job_position.title %>
     </div>
     <div class="card__row">
       <label for="company_work_phone" class="card__label">Рабочий телефон : </label>
@@ -43,7 +43,7 @@
     </div>
     <div class="card__row">
       <label for="company_industry" class="card__label">Сфера деятельности : </label>
-      <%= Industry.find(@company.industry_id).title %>
+      <%= @company.industry.title %>
     </div>
     <div class="card__row">
       <%= label :birthdate, 'День рождения компании :', class: 'card__label' %> <%= @company.birthdate %>
