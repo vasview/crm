@@ -6,33 +6,35 @@
     </div>
     <div class="form__row">
       <%= f.label :category_id, 'Категория членов : ', class: 'form__label' %>
-      <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет'}, {promp: true, class: 'form__input'}) %>
+      <%= collection_select(:interaction, :category_id, Category.all, :id, :title, {include_blank: 'Комитет' }, { promp: true, class: 'form__input' }) %>
     </div>
     <div class="form__row">
       <label for="interaction_committee" class="form__label">Комитет : </label>
-      <%= collection_select(:interaction, :committee_id, Committee.all, :id, :title, {include_blank: true}, {promp: true, class: 'form__input'}) %>
+      <%= collection_select(:interaction, :committee_id, Committee.all, :id, :title, {include_blank: 'Выберите комитет' }, { class: 'form__input', }) %>
     </div>
-    <div class="form__row">
+    <div class="form__row" id="company__selection">
       <%= f.label :company_id, 'Компания : ', class: 'form__label' %>
-      <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: true}, {promp: true, class: 'form__input'}) %>
+      <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: 'Выберите компанию' }, { promp: true, class: 'form__input' }) %>
     </div>
-    <div class="form__row">
+    <div class="form__row" id="representative__selection">
       <%= f.label "ФИО представителя : ", class: 'form__label'%>
-      <%= collection_select(:interaction, :representative_id, Representative.all, :id, :fullname, {promp: true}, class: 'form__input') %>
+      <select name="interaction[representative_id]" id="interaction_representative_id" class="form__input" disabled="disabled">
+        <option value>Выберите представителя</option>
+      </select>
     </div>
     <div class="form__row">
       <%= f.label "Вид услуги : ", class: 'form__label'%>
-      <%= collection_select(:interaction, :service_id, Service.all, :id, :name, {promp: true}, {class: 'form__input'}) %>
+      <%= collection_select(:interaction, :service_id, Service.all, :id, :name, { promp: true }, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
       <label for="interaction_user" class="form__label">Ответственный сотрудник : </label>
-      <%= collection_select(:interaction, :user_id, User.all, :id, :fullname, {promp: true, selected: current_user.id}, {class: 'form__input'}) %>
+      <%= collection_select(:interaction, :user_id, User.all_except(1), :id, :fullname, { selected: current_user.id}, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
       <label for="" class="form__label">Дата взаимодействия:</label>
       <p>
-        <%= f.label :start_date, 'Начало :' %> <%= f.text_field :start_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
-        <%= f.label :end_date, 'Oкончание :' %> <%= f.text_field :end_date, {type: 'date', value: DateTime.now.strftime("%Y-%m-%d")} %>
+        <%= f.label :start_date, 'Начало :' %> <%= f.text_field :start_date, { type: 'date', value: DateTime.now.strftime("%Y-%m-%d") } %>
+        <%= f.label :end_date, 'Oкончание :' %> <%= f.text_field :end_date, { type: 'date', value: DateTime.now.strftime("%Y-%m-%d") } %>
       </p>
     </div>
     <div class="form__row form__notes-block">
@@ -40,7 +42,8 @@
       <%= f.text_area :notes, class: 'form__textarea' %>
     </div>
     <div class="form__row">
-      <%= f.submit "Создать", class: 'button form__button' %>
+      <%= f.submit "Создать", class: 'button form__button form__btn-submit', disabled: 'disabled' %>
+      <%= button_tag t("Очистить форму"), type: :reset, name: 'reset-btn', class: 'button form__button form__btn-reset' %>
     </div>
   <% end %>
 </div>

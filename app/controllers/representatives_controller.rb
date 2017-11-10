@@ -79,6 +79,12 @@ class RepresentativesController < ApplicationController
     end
   end
 
+  def update_representative_options
+    @representative_selection = Representative.where(company_id: params[:id])
+
+    render partial: 'representative_selection'
+  end
+
   private
 
   def representative_params

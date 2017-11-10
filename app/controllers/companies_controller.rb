@@ -84,6 +84,12 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def update_company_options
+    @company_selection = company_selection
+
+    render partial: 'company_selection'
+  end
+
   private
 
   def set_filter_period
@@ -115,5 +121,10 @@ class CompaniesController < ApplicationController
   def filter_params
     return { period: '' } if params[:filter].nil?
     params.require(:filter).permit(:category, :date, :period, :status)
+  end
+
+  def company_selection
+    return Company.where(category_id: params[:id]) if params[:id].present?
+    Company.status('active')
   end
 end

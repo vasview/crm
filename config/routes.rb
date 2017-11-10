@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   post 'main/filter_companies', to: 'main#filter_companies'
 
+  get 'update_company_options', to: 'companies#update_company_options'
+  get 'update_representative_options', to: 'representatives#update_representative_options'
+
   resources :users
 
   resources :interactions, except: [:destroy] do

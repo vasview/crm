@@ -1,0 +1,4 @@
+<option value=''>Выберите представителя</option>
+<% @representative_selection.each do |representative| %>
+  <option value="<%= representative.id%>"><%= representative.fullname%></option>
+<% end %>

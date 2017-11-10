@@ -1,0 +1,6 @@
+<option value=''>Выберите компанию</option>
+<% @company_selection.each do |company| %>
+  <option value="<%= company.id%>"><%= company.name%></option>
+<% end %>
+
+
