@@ -23,7 +23,7 @@ class WriteInteractionResult
     case define_company
 
     when 'all'
-      companies = Company.all
+      companies = Company.status('active')
       service_cost = Service.find(params[:service_id].to_i).cost
       companies.map{ |company| save_result(company.id, service_cost) }
 
@@ -46,9 +46,9 @@ class WriteInteractionResult
   def define_company
     return 'all' unless context.all_members == '0'
 
-    return 'committee' unless params[:committee_id].nil?
+    return 'committee' unless params[:committee_id].empty?
 
-    return 'company' unless params[:company_id].nil?
+    return 'company' unless params[:company_id].empty?
   end
 
   def save_result(company, cost)

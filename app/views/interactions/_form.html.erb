@@ -14,13 +14,17 @@
     </div>
     <div class="form__row" id="company__selection">
       <%= f.label :company_id, 'Компания : ', class: 'form__label' %>
-      <%= collection_select(:interaction, :company_id, Company.all, :id, :name, {include_blank: 'Выберите компанию' }, { promp: true, class: 'form__input' }) %>
+      <%= collection_select(:interaction, :company_id, Company.status('active'), :id, :name, {include_blank: 'Выберите компанию' }, { promp: true, class: 'form__input' }) %>
     </div>
     <div class="form__row" id="representative__selection">
       <%= f.label "ФИО представителя : ", class: 'form__label'%>
-      <select name="interaction[representative_id]" id="interaction_representative_id" class="form__input" disabled="disabled">
-        <option value>Выберите представителя</option>
-      </select>
+      <% if params[:action] == 'new' %>
+        <select name="interaction[representative_id]" id="interaction_representative_id" class="form__input" disabled="disabled">
+          <option value>Выберите представителя</option>
+        </select>
+      <% else %>
+        <%= collection_select(:interaction, :representative_id, Representative.company(@interaction.company_id), :id, :fullname, { include_blank: 'Выберите представителя'}, { class: 'form__input' }) %>
+      <% end %>
     </div>
     <div class="form__row">
       <%= f.label "Вид услуги : ", class: 'form__label'%>
@@ -42,8 +46,15 @@
       <%= f.text_area :notes, class: 'form__textarea' %>
     </div>
     <div class="form__row">
-      <%= f.submit "Создать", class: 'button form__button form__btn-submit', disabled: 'disabled' %>
-      <%= button_tag t("Очистить форму"), type: :reset, name: 'reset-btn', class: 'button form__button form__btn-reset' %>
+      <% if params[:action] == 'new' %>
+        <%= f.submit "Создать", class: 'button form__button form__btn-submit', disabled: 'disabled' %>
+        <%= button_tag t("Очистить форму"), type: :reset, name: 'reset-btn', class: 'button form__button form__btn-reset' %>
+      <% else %>
+        <%= f.submit "Обновить", class: 'button form__button form__btn-submit' %>
+        <%= button_tag onclick: "location.href='#{interactions_path}'", type: :button, class: "button form__button form__btn-cancel" do %>
+            <%= t("Отменить") %>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>

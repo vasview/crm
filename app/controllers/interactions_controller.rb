@@ -27,7 +27,7 @@ class InteractionsController < ApplicationController
                                            all_members: params[:interaction][:all_members][:selected],
                                            interaction: @interaction)
 
-      redirect_to interaction_path(@interaction)
+      redirect_to interaction_path(@interaction, { back_to_all: true })
     else
       render :edit
     end
@@ -48,7 +48,7 @@ class InteractionsController < ApplicationController
                                            all_members: params[:interaction][:all_members][:selected],
                                            interaction: @interaction)
 
-      redirect_to interaction_path(@interaction)
+      redirect_to interaction_path(@interaction, { back_to_all: true })
     else
       render :edit
     end

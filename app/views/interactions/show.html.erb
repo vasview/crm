@@ -1,7 +1,11 @@
 <div class="page__inner">
   <div class="card-info__block">
     <p class="back-link__block">
-      <%= link_to "Назад", :back, class: 'back-link' %>
+      <% if params[:back_to_all] %>
+        <%= link_to "<< К списку взаимодействий", interactions_path, class: 'back-link' %>
+      <% else %>
+        <%= link_to "Назад", :back, class: 'back-link' %>
+      <% end %>
     </p>
     <h2 class="card__title">Просмотр взаимодействия</h2>
     <div class="card__row">
