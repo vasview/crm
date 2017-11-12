@@ -113,8 +113,11 @@ class CompaniesController < ApplicationController
 
   def representative_params
     params.require(:company).permit(:executive).tap do |whitelisted|
-      whitelisted[:fullname] = params[:company][:executive][:representative][:fullname]
+      whitelisted[:firstname] = params[:company][:executive][:representative][:firstname]
+      whitelisted[:middlename] = params[:company][:executive][:representative][:middlename]
+      whitelisted[:lastname] = params[:company][:executive][:representative][:lastname]
       whitelisted[:job_position_id] = params[:company][:executive][:representative][:job_position_id]
+      whitelisted[:fullname] = helpers.representative_fullname(params[:company][:executive])
     end
   end
 
