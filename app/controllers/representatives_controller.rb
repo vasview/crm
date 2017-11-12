@@ -15,7 +15,7 @@ class RepresentativesController < ApplicationController
   end
 
   def create
-    @representative = Representative.create(representative_params.merge(fullname: representative_fullname))
+    @representative = Representative.create(representative_params.merge(fullname: helpers.representative_fullname(params)))
 
     @count_committees =1
     @representative.committee_representatives.each do |com_rep|
@@ -94,18 +94,12 @@ class RepresentativesController < ApplicationController
                                            committee_representatives_attributes: [committee_id: [] ])
   end
 
-  def representative_fullname
-    [ params[:representative][:firstname],
-      params[:representative][:middlename],
-      params[:representative][:lastname] ].join(' ')
-  end
-
   def representative_committees_params
     representative_params[:committee_representatives_attributes]["0"][:committee_id].reject{|n| n.empty?}
   end
 
   def representative_update_params
-    representative_params.merge(fullname: representative_fullname)
+    representative_params.merge(fullname: helpers.representative_fullname(params))
                          .except(:committee_representatives_attributes)
   end
 end

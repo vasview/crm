@@ -14,26 +14,26 @@
     </div>
     <div class="form__row">
       <%= f.label :company_id, 'Компания : ', class: 'form__label' %>
-      <%= collection_select(:representative,:company_id, Company.all, :id, :name, {promp: true}, {class: 'form__input'} ) %>
+      <%= collection_select(:representative,:company_id, Company.all, :id, :name, {promp: true}, { class: 'form__input form__input-collection' } ) %>
     </div>
     <div class="form__row">
       <%= f.label :job_position_id, 'Должность : ', class: 'form__label' %>
-      <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, {promp: true}, {class: 'form__input'} ) %>
+      <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, {promp: true}, { class: 'form__input form__input-collection' } ) %>
     </div>
     <div class="form__row">
       <%= f.label 'Член коммитета : ',class: 'form__label' %>
       <%= f.fields_for :committee_representatives do |com_rep| %>
-        <%= com_rep.collection_select(:committee_id, Committee.all, :id, :title, {include_blank: true}, {multiple: true, class: 'form__input'} ) %>
+        <%= com_rep.collection_select(:committee_id, Committee.all, :id, :title, { include_blank: true }, { multiple: true, class: 'form__input form__input-collection' } ) %>
       <% end %>
     </div>
     <div class="form__row">
       <label for="representative_work_phone" class="form__label">Рабочий телефон : </label> <%= f.text_field :work_phone, {type: 'tel', class: 'form__input'} %>
     </div>
     <div class="form__row">
-      <label for="representative_mobile_phone" class="form__label">Мобильный телефон : </label> <%= f.text_field :mobile_phone , {type: 'tel', class: 'form__input'} %>
+      <label for="representative_mobile_phone" class="form__label">Мобильный телефон : </label> <%= f.text_field :mobile_phone , { type: 'tel', class: 'form__input' } %>
     </div>
     <div class="form__row">
-      <label for="representative_email" class="form__label">Email:</label> <%= f.text_field :email, {type: 'email', class: 'form__input'} %>
+      <label for="representative_email" class="form__label">Email:</label> <%= f.text_field :email, { type: 'email', class: 'form__input' } %>
     </div>
     <div class="form__row">
       <%= f.label :birthdate, 'День рождения :', class: 'form__label' %> <%= f.text_field :birthdate, {type: 'date', class: 'form__input'} %>

@@ -255,8 +255,16 @@ footer {
   font-weight: bolder;
   text-align: left;
 }
+.form__label-nested {
+  margin-left: 20px;
+  width: 150px;
+}
 .form__input {
-  width: 300px;
+  width: 290px;
+  padding: 0 5px;
+}
+.form__input-collection {
+  width: 304px;
 }
 .form__textarea {
   width: 300px;
