@@ -50,8 +50,8 @@
     </div>
     <div class="form__row">
       <%= f.label 'Член коммитета : ',class: 'form__label' %>
-      <%= f.fields_for :committee_representatives do |com_rep| %>
-        <%= com_rep.collection_select(:committee_id, Committee.all, :id, :title, { include_blank: true }, { multiple: true, class: 'form__input form__input-collection' } ) %>
+      <%= f.fields_for :committee_representatives[0] do |com_rep| %>
+        <%= collection_select(:committee_representatives, :committee_ids, Committee.all, :id, :title, {  selected: @committee_ids, include_blank: true }, { multiple: true, class: 'form__input form__input-collection' } ) %>
       <% end %>
     </div>
     <div class="form__row">

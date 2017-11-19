@@ -15,50 +15,46 @@ class RepresentativesController < ApplicationController
   end
 
   def create
-    @representative = Representative.create(representative_params.merge(fullname: helpers.representative_fullname(params)))
+    @representative_form = RepresentativeForm.new
+    @representative_form.validate(representative_params)
 
-    @count_committees =1
-    @representative.committee_representatives.each do |com_rep|
-      com_rep.committee_id = representative_params[:committee_representatives_attributes]["0"][:committee_id][@count_committees]
-      @count_committees += 1
-    end
+    if @representative_form.errors.empty?
+      @representative = Representative.create(representative_params.merge(fullname: representative_fullname))
 
-    if @representative.save
+      save_representative_committee()
 
-      representative_params[:committee_representatives_attributes]["0"][:committee_id].drop(@count_committees).each do |com_rep|
-        @committee = @representative.committee_representatives.build(committee_id: representative_params[:committee_representatives_attributes]["0"][:committee_id][@count_committees])
-        @committee.save
-        @count_committees += 1
-      end
-
-      redirect_to representatives_path, notice: "Карточка представителя компании успешно добавлен."
+      redirect_to representatives_path, notice: "Карточка представителя компании успешно добавлена."
     else
-      render :new
+      render :new, locals: { errors: @representative_form.errors.messages }
     end
   end
 
   def edit
     @representative = Representative.find(params[:id])
-    @representative.committee_representatives.build unless @representative.committee_representatives.present?
+    if @representative.committee_representatives.present?
+      committees = @representative.committee_representatives
+      @committee_ids = committees.map { |c| c.committee_id }
+    else
+      @representative.committee_representatives.build
+    end
   end
 
   def update
     @representative = Representative.find(params[:id])
 
-    @count_committees = representative_committees_params.size
+    @representative_form = RepresentativeForm.new
+    @representative_form.validate(representative_params)
 
-
+    if @representative_form.errors.empty?
       @representative.committee_representatives.clear
 
-      (0...@count_committees).each do |count|
-        @committee = @representative.committee_representatives.build(committee_id: representative_committees_params[count])
-        @committee.save
-      end
-    if @representative.update_attributes(representative_update_params)
+      save_representative_committee()
+
+      @representative.update_attributes(representative_params.merge(fullname: representative_fullname))
 
       redirect_to representative_path(@representative), notice: "Карточка представителя компании успешно отредактирована."
     else
-      render :edit
+      render :edit, locals: { errors: @representative_form.errors.messages }
     end
   end
 
@@ -90,16 +86,26 @@ class RepresentativesController < ApplicationController
   def representative_params
     params.require(:representative).permit(:id, :firstname, :middlename, :lastname,
                                            :work_phone, :mobile_phone, :email, :company_id,
-                                           :job_position_id, :birthdate, :notes, :preferences,
-                                           committee_representatives_attributes: [committee_id: [] ])
+                                           :job_position_id, :birthdate, :notes, :preferences
+                                          )
+  end
+
+  def representative_fullname
+    helpers.representative_fullname(representative_params.slice(:firstname, :middlename, :lastname))
+  end
+
+  def save_representative_committee
+    representative_committees.map do |com_rep_id|
+      @committee = @representative.committee_representatives.build(committee_id: com_rep_id)
+      @committee.save
+    end
   end
 
   def representative_committees_params
-    representative_params[:committee_representatives_attributes]["0"][:committee_id].reject{|n| n.empty?}
+    params.require(:committee_representatives).permit(committee_ids: [])
   end
 
-  def representative_update_params
-    representative_params.merge(fullname: helpers.representative_fullname(params))
-                         .except(:committee_representatives_attributes)
+  def representative_committees
+    representative_committees_params[:committee_ids].reject(&:blank?)
   end
 end

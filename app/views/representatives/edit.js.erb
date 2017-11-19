@@ -1,0 +1,25 @@
+function clear_fields() {
+  var $form_fields = $('.form-errors span');
+  $.each($form_fields, function (index, field) {
+    $(field).html('');
+  });
+} clear_fields();
+
+function show_errors() {
+  var $form_errors = <%= errors.to_json.html_safe %>;
+
+  $.each($form_errors, function (key, errors) {
+    var $error_field = $('.form-item__' + key + ' span');
+    var $error_parent_row = $error_field.parent().parent().parent();
+    var $errorFieldLabel = $error_parent_row.find('.form-item label');
+    var errorFieldName = $errorFieldLabel.text().slice(0, -1);
+
+    $error_parent_row.addClass('form__row-errors');
+    $error_field.html(errorFieldName + ' ');
+
+    $.each(errors, function (index, error) {
+      $error_field.append(error);
+    });
+
+  });
+} show_errors();
