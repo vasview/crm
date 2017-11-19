@@ -46,9 +46,9 @@ class WriteInteractionResult
   def define_company
     return 'all' unless context.all_members == '0'
 
-    return 'committee' unless params[:committee_id].empty?
+    return 'committee' unless params[:committee_id].blank?
 
-    return 'company' unless params[:company_id].empty?
+    return 'company' unless params[:company_id].blank?
   end
 
   def save_result(company, cost)
