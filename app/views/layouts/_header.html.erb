@@ -9,9 +9,9 @@
       <% end %>
       <li class='menu__item'><%= link_to 'Представители', representatives_path, class: 'menu__item-link' %></li>
       <% if user_signed_in? %>
-        <li class='menu__item'><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'menu__item-link' %></li>
+        <li class='menu__item'><%= link_to 'Выход', destroy_user_session_path, method: :delete, class: 'menu__item-link' %></li>
       <% else %>
-        <li class='menu__item'><%= link_to 'Войти', new_user_session_path, class: 'menu__item-link' %></li>
+        <li class='menu__item'><%= link_to 'Вход', new_user_session_path, class: 'menu__item-link' %></li>
       <% end %>
     </ul>
   </div>
