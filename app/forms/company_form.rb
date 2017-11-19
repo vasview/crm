@@ -24,16 +24,7 @@ class CompanyForm < BaseForm
   validates :industry_id,       presence: true
   validates :entry_date,        presence: true
 
-    # collection :representatives do
-    # property :company_id
-    # property :representative_id
-
-      validates :firstname,       presence: true
-      validates :lastname,        presence: true
-      validates :job_position_id, presence: true
-  # end
-
-  # collection :representatives do
-
-  # end
+  validates :firstname,       presence: true
+  validates :lastname,        presence: true
+  validates :job_position_id, presence: true
 end

@@ -6,8 +6,6 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
-    # @executive = @company.executives.build
-    # @representative = @executive.build_representative
     @representative = @company.representatives.build
   end
 

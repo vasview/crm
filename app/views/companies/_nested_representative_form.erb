@@ -1,5 +1,3 @@
-<%#= f.fields_for @executive do |executive_form| %>
-  <%#= executive_form.fields_for @representative do |rep_form| %>
 <%= f.fields_for @representative do |rep_form| %>
   <div class="form__row">
     <div class="form-item">
@@ -29,6 +27,5 @@
   <div class="form__row">
       <%= label :job_position_id, "Должность руководителя :", class: 'form__label form__label-nested' %>
       <%= rep_form.collection_select(:job_position_id, JobPosition.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' } ) %>
-      <%# end %>
     </div>
 <% end %>
