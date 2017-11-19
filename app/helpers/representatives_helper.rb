@@ -1,7 +1,6 @@
 module RepresentativesHelper
-  def representative_fullname(params)
-    [ params[:representative][:firstname],
-      params[:representative][:middlename],
-      params[:representative][:lastname] ].join(' ')
+  def representative_fullname(fio)
+    fullname = [fio[:firstname], fio[:middlename], fio[:lastname]]
+    fullname.join(' ')
   end
 end

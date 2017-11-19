@@ -1,12 +1,26 @@
 <div class="form__wrapper">
-  <%= form_for @company, class: 'company-form' do |f| %>
+  <%= form_for @company, class: 'company-form', remote: true do |f| %>
     <div class="form__row">
-      <%= f.label :category_id, 'Категория членов', class: 'form__label'%>
-      <%= collection_select(:company, :category_id, Category.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' }) %>
+      <div class="form-item">
+        <%= f.label :category_id, 'Категория членов :', class: 'form__label'%>
+        <%= collection_select(:company, :category_id, Category.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' }) %>
+      </div>
+      <div class="form-item__errors form-item__category">
+        <div class="form-errors">
+          <span></span>
+        </div>
+      </div>
     </div>
     <div class="form__row">
-      <%= f.label :name, 'Название', class: 'form__label'%>
-      <%= f.text_field :name, class: 'form__input' %>
+      <div class="form-item">
+        <%= f.label :name, "Название :", class: 'form__label form__mandatory-field'%>
+        <%= f.text_field :name, class: 'form__input form__input-error-prone' %>
+      </div>
+      <div class="form-item__errors form-item__name">
+        <div class="form-errors">
+          <span></span>
+        </div>
+      </div>
     </div>
     <div class="form__row">
       <label for="company_city" class="form__label">Город : </label>
@@ -48,8 +62,15 @@
       </span>
     </div>
     <div class="form__row">
-      <%= f.label :entry_date, "Дата вступления :", class: 'form__label' %>
-      <%= f.text_field :entry_date, { type: 'date', class: 'form__input' } %>
+      <div class="form-item">
+        <%= f.label :entry_date, "Дата вступления :", class: 'form__label form__mandatory-field' %>
+        <%= f.text_field :entry_date, { type: 'date', class: 'form__input form__input-error-prone' } %>
+      </div>
+      <div class="form-item__errors form-item__entry_date">
+        <div class="form-errors">
+          <span></span>
+        </div>
+      </div>
     </div>
      <div class="form__row">
       <%= f.label :exit_date, "Дата выбытия :", class: 'form__label' %>
@@ -62,6 +83,9 @@
     <div class="form__row form__notes-block">
       <label for="company_notes" class="form__label">Примечание:</label>
       <%= f.text_area :notes, class: 'form__textarea' %>
+    </div>
+    <div class="form__row">
+      <i class="warning-info">* - обязательные к заполнению поля </i>
     </div>
     <div class="form__row">
       <%= f.submit "Создать", class: 'button form__button' %>

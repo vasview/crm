@@ -1,17 +1,34 @@
-<%= f.fields_for @executive do |executive_form| %>
-  <%= executive_form.fields_for @representative do |rep_form| %>
+<%#= f.fields_for @executive do |executive_form| %>
+  <%#= executive_form.fields_for @representative do |rep_form| %>
+<%= f.fields_for @representative do |rep_form| %>
   <div class="form__row">
-    <%= label_tag :firstname, "Имя: ",  class: 'form__label form__label-nested'%> <%= rep_form.text_field :firstname, class: 'form__input' %>
+    <div class="form-item">
+      <%= label_tag :firstname, "Имя :",  class: 'form__label form__label-nested form__mandatory-field'%>
+      <%= rep_form.text_field :firstname, class: 'form__input form__input-error-prone' %>
+    </div>
+    <div class="form-item__errors form-item__firstname">
+      <div class="form-errors">
+        <span></span>
+      </div>
+    </div>
   </div>
   <div class="form__row">
-    <%= label_tag :middlename, "Отчество: ", class: 'form__label form__label-nested'%> <%= rep_form.text_field :middlename, class: 'form__input' %>
+    <%= label_tag :middlename, "Отчество :", class: 'form__label form__label-nested'%> <%= rep_form.text_field :middlename, class: 'form__input' %>
   </div>
   <div class="form__row">
-    <%= label_tag :lastname, "Фамилия: ", class: 'form__label form__label-nested'%> <%= rep_form.text_field :lastname, class: 'form__input' %>
+    <div class="form-item">
+      <%= label_tag :lastname, "Фамилия :", class: 'form__label form__label-nested form__mandatory-field'%>
+      <%= rep_form.text_field :lastname, class: 'form__input form__input-error-prone' %>
+    </div>
+    <div class="form-item__errors form-item__lastname">
+      <div class="form-errors">
+        <span></span>
+      </div>
+    </div>
   </div>
   <div class="form__row">
-      <%= label :job_position_id, "Должность руководителя: ", class: 'form__label form__label-nested' %>
+      <%= label :job_position_id, "Должность руководителя :", class: 'form__label form__label-nested' %>
       <%= rep_form.collection_select(:job_position_id, JobPosition.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' } ) %>
-      <% end %>
+      <%# end %>
     </div>
 <% end %>

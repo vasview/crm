@@ -2,11 +2,13 @@ class CompaniesController < ApplicationController
   include FilterDates
 
   before_action :set_filter_period, only: [:index, :filter]
+  before_action :representative_params, only: [:create]
 
   def new
     @company = Company.new
-    @executive = @company.executives.build
-    @representative = @executive.build_representative
+    # @executive = @company.executives.build
+    # @representative = @executive.build_representative
+    @representative = @company.representatives.build
   end
 
   def index
@@ -29,18 +31,19 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.create(company_params)
-    if @company.save
+    @companyform = CompanyForm.new
+    @companyform.validate(company_params.merge(representative_params))
+
+    if @companyform.errors.empty?
+      @company = Company.create(company_params)
       @representative = Representative.create(representative_params.merge(company_id: @company.id, company_head: true))
-      @representative.save
       @executive = Executive.create(company_id: @company.id, representative_id: @representative.id)
-      @executive.save
 
       flash[:notice] = "Карточка компания успешно добавлена."
 
       redirect_to companies_path
     else
-      render :new
+      render :new , locals: { errors: @companyform.errors.messages }
     end
   end
 
@@ -55,13 +58,17 @@ class CompaniesController < ApplicationController
     @executive = @company.executives.first
     @representative = @executive.representative
 
-    if @company.update_attributes(company_params)
+    @companyform = CompanyForm.new
+    @companyform.validate(company_params.merge(representative_params))
+
+    if @companyform.errors.empty?
+      @company.update_attributes(company_params)
       @representative.update_attributes(representative_params)
 
       flash[:notice] = "Карточка компании успешно обновлена."
       redirect_to company_path(@company)
     else
-      render :edit
+      render :edit, locals: { errors: @companyform.errors.messages }
     end
   end
 
@@ -108,17 +115,16 @@ class CompaniesController < ApplicationController
                                     :email, :birthdate, :status,
                                     :category_id, :industry_id,
                                     :city_id, :entry_date,
-                                    :exit_date, :exit_reason, :notes)
+                                    :exit_date, :exit_reason, :notes,
+ )
   end
 
   def representative_params
-    params.require(:company).permit(:executive).tap do |whitelisted|
-      whitelisted[:firstname] = params[:company][:executive][:representative][:firstname]
-      whitelisted[:middlename] = params[:company][:executive][:representative][:middlename]
-      whitelisted[:lastname] = params[:company][:executive][:representative][:lastname]
-      whitelisted[:job_position_id] = params[:company][:executive][:representative][:job_position_id]
-      whitelisted[:fullname] = helpers.representative_fullname(params[:company][:executive])
-    end
+    rep_params = []
+    rep_params = params[:company].require(:representative).permit(:firstname, :middlename,
+                                                                  :lastname, :job_position_id)
+    rep_params[:fullname] = helpers.representative_fullname(params[:company][:representative].slice(:firstname, :middlename, :lastname))
+    rep_params
   end
 
   def filter_params

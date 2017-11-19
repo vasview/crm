@@ -17,7 +17,8 @@ class Company < ApplicationRecord
   has_many :representatives
   has_many :executives, inverse_of: :company, dependent: :destroy
 
-  accepts_nested_attributes_for :executives, allow_destroy: true
+  # accepts_nested_attributes_for :executives, allow_destroy: true
+  accepts_nested_attributes_for :representatives, allow_destroy: true
 
   def is_active?
     self.status == 'active' ? true : false
