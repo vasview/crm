@@ -4,7 +4,7 @@
     <%= form_tag filter_representatives_path, id: "representative_filter_form", method: :post, remote: true do %>
       <p>
         <label for="company_filter">По компании : </label>
-        <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select') %>
+        <%= collection_select(:filter, :company, Company.all, :id, :name, {include_blank: 'Все'}, promp: true, class: 'company_filter_select filter_select') %>
       </p>
       <p>
         <label for="job_filter">По должности : </label>
