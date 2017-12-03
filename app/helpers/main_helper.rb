@@ -24,4 +24,8 @@ module MainHelper
       company.color = "red"
     end
   end
+
+  def get_scores_in_descending_order(companies)
+    companies.sort_by { |company| company.total }.reverse!
+  end
 end

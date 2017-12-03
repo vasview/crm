@@ -8,6 +8,8 @@ class MainController < ApplicationController
 
     helpers.score_companies(@companies)
 
+    @companies = helpers.get_scores_in_descending_order(@companies)
+
     @corporate_members = helpers.get_corporate_members
     @associates_members = helpers.get_accossiates_members
     @honarable_members = helpers.get_honarable_members
@@ -17,6 +19,8 @@ class MainController < ApplicationController
     @companies = Company.status('active').filter(params[:filter].slice(:category))
 
     helpers.score_companies(@companies)
+
+    @companies = helpers.get_scores_in_descending_order(@companies)
 
     if color_filters.present?
      @companies = filter_by_colors(@companies, color_filters)
