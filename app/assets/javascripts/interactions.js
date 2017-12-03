@@ -114,7 +114,7 @@ $(document).on('turbolinks:load',function() {
   });
 
   $(document).on('click', "tr[data-link]", function() {
-    window.location = $(this).data("link")
+    window.location = $(this).data("link");
   });
 
 });
@@ -128,5 +128,5 @@ function sendAjaxRequest(URL, send_data, parent_element) {
       parent_element.html(data)
     }
 
-  })
+  });
 };
