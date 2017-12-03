@@ -3,13 +3,15 @@
   <span class="section__link-add"><%= link_to "Добавить компанию", new_company_path %></span>
 </div>
 <div class="count__indicator">
-  Всего активных компаний : <%= @active_companies %> из них :
-  <span>корпоративных членов : <%= @corporate_members %>, </span>
-  <span>ассоциативных членов : <%= @associates_members %>, </span>
-  <span>почетных членов : <%= @honarable_members %></span>
+  <span class="count__indicator_all">Всего активных компаний : <strong><i><%= @active_companies %></strong></i> из них :</span>
+  <div class="count__indicator_sub">
+    <span>корпоративных членов : <%= @corporate_members %>, </span>
+    <span>ассоциативных членов : <%= @associates_members %>, </span>
+    <span>почетных членов : <%= @honarable_members %></span>
+  </div>
 </div>
 <div class="count__indicator">
-  Всего выбывших компаний : <%= @inactive_companies %>
+  Всего выбывших компаний : <strong><i><%= @inactive_companies %></strong></i>
 </div>
 <div class="page__inner">
   <div class="main__section">

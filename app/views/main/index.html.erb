@@ -3,12 +3,14 @@
   <span class="section__link-add">
     <%= link_to('Новое взаимодействие', new_interaction_path) if user_signed_in? %>
   </span>
-  <p>
-    Всего компаний : <%= @companies.size %> из них :
-    <span>корпоративных членов : <%= @corporate_members %>, </span>
-    <span>ассоциативных членов : <%= @associates_members %>, </span>
-    <span>почетных членов : <%= @honarable_members %></span>
-  </p>
+  <div class="count__indicator">
+    <span class="count__indicator_all">Всего компаний : <strong><i><%= @companies.size %></i></strong> из них :</span>
+    <div class="count__indicator_sub">
+      <span>корпоративных членов : <em><%= @corporate_members %></em>, </span>
+      <span>ассоциативных членов : <em><%= @associates_members %></em>, </span>
+      <span>почетных членов : <em><%= @honarable_members %></em></span>.
+    </div>
+  </div>
 </div>
 <div class="page__inner">
   <div class="main__section">
