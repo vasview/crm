@@ -1,6 +1,6 @@
-//= require jquery-3.2.0.min
 //= require rails-ujs
 //= require turbolinks
+//= require jquery-3.2.0.min
 //= require sidebar
 //= require representative_sidebar
 //= require interactions
