@@ -15,11 +15,10 @@
   display: inline-block;
 }
 .company__item-row:hover {
-  // background: #581865;
   background: #9b59b6;
-  // background: rgba(0,0,255,0.3);
   color: #fff;
-  font-size: 16px;
+  // font-size: 16px;
+  font-weight: italic;
 }
 .company__item-action-header,
 .company__item-action {
