@@ -1,10 +1,15 @@
-<h2>Список компаний</h2>
-<p>
-  Всего компаний : <%= @companies.size %> из них :
-  <span>корпоративных членов : <%= @corporate_members %>, </span>
-  <span>ассоциативных членов : <%= @associates_members %>, </span>
-  <span>почетных членов : <%= @honarable_members %></span>
-</p>
+<div class="section_title-block">
+  <h2 class="main__title">Список компаний</h2>
+  <span class="section__link-add">
+    <%= link_to('Новое взаимодействие', new_interaction_path) if user_signed_in? %>
+  </span>
+  <p>
+    Всего компаний : <%= @companies.size %> из них :
+    <span>корпоративных членов : <%= @corporate_members %>, </span>
+    <span>ассоциативных членов : <%= @associates_members %>, </span>
+    <span>почетных членов : <%= @honarable_members %></span>
+  </p>
+</div>
 <div class="page__inner">
   <div class="main__section">
     <%= render 'sidebar' %>
