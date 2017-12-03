@@ -20,7 +20,9 @@ $(document).on('turbolinks:load turbolinks:render', function() {
   $cancelButton.on('click', function(e) {
     e.preventDefault();
     var $allFormInputs = $companyFilterForm.find('input');
-    form = e.toElement.form;
+    var target = e.target;
+
+    form = target.form;
     form.reset();
     $('.filter__input-period').hide();
     $submitButton.click();

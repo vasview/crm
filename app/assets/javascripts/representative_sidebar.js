@@ -7,9 +7,9 @@ $(document).on('turbolinks:load', function() {
   $cancelButton.on('click', function(e) {
     e.preventDefault();
     var $allFormInputs = $representativeFilterForm.find('input');
-    var element = e.target;
-    form = element.form;
-    // form = e.toElement.form;
+    var target = e.target;
+
+    form = target.form;
     form.reset();
     $submitButton.click();
   });
