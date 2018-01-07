@@ -26,6 +26,6 @@
   </div>
   <div class="form__row">
       <%= label :job_position_id, "Должность руководителя :", class: 'form__label form__label-nested' %>
-      <%= rep_form.collection_select(:job_position_id, JobPosition.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' } ) %>
+      <%= rep_form.collection_select(:job_position_id, JobPosition.status('active'), :id, :title, { promp: true }, { class: 'form__input form__input-collection' } ) %>
     </div>
 <% end %>

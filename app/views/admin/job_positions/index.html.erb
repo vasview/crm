@@ -1,0 +1,12 @@
+<div class="section_title-block">
+  <h2 class="main__title">Список должностей</h2>
+  <span class="section__link-add"><%= link_to "Добавить должность", new_admin_job_position_path %></span>
+</div>
+<div class="job_position_form"></div>
+<div class="page__inner">
+  <div class="main__section">
+    <div class="job_position_list__block list__section">
+      <%= render partial: 'admin/job_positions/table' %>
+    </div>
+  </div>
+</div>

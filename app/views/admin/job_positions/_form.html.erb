@@ -1,0 +1,19 @@
+<div class="form__wrapper">
+  <%= form_for [:admin, @job_position], class: 'job_position__form' do |f| %>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :title, 'Название должности :', class: 'form__label form__mandatory-field'%>
+        <%= f.text_field :title, class: 'form__input form__input-error-job_title'%>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :status, 'Статус должности :', class: 'form__label form__mandatory-field'%>
+        <%= f.select :status, JobPosition.statuses.keys %>
+      </div>
+    </div>
+    <div class="form__row">
+      <%= f.submit "Создать", class: 'button form__button' %>
+    </div>
+  <% end %>
+</div>

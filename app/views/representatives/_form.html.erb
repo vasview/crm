@@ -40,7 +40,7 @@
     <div class="form__row">
       <div class="form-item">
         <%= f.label :job_position_id, 'Должность :', class: 'form__label form__mandatory-field' %>
-        <%= collection_select(:representative,:job_position_id, JobPosition.all, :id, :title, {promp: true}, { class: 'form__input form__input-collection form__input-error-prone' } ) %>
+        <%= collection_select(:representative,:job_position_id, JobPosition.status('active'), :id, :title, {promp: true}, { class: 'form__input form__input-collection form__input-error-prone' } ) %>
       </div>
       <div class="form-item__errors form-item__job_position_id">
         <div class="form-errors">
