@@ -7,13 +7,13 @@
       <th>Действие</th>
     </tr>
     <% @industry_all.each do |industry| %>
-      <tr class="table__item-row1 table__item-row_no_pointer">
+      <tr class="table__item-row table__row_without_pointer">
         <td class="table__item"><%= industry.title %></td>
         <td class="table__item"><%= industry.description %></td>
         <td class="table__item">
           <%= industry.status == 'active' ? 'Действующий' : 'Архивный' %>
         </td>
-        <td class="table__item">
+        <td class="table__item table__item-action">
           <%= link_to "Редактировать", edit_admin_industry_path(industry)%>&nbsp;|&nbsp;
           <%= link_to_if industry.status == 'active',
             "Удалить", admin_industry_path(industry), :method => :delete, data: {:confirm => "Вы уверены, что хотите удалить должность '#{industry.title}'?" }, :title => "Удалить #{industry.title}" %>

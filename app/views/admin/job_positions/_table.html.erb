@@ -6,12 +6,12 @@
       <th>Действие</th>
     </tr>
     <% @job_position_all.each do |job_position| %>
-      <tr class="table__item-row1 table__item-row_no_pointer">
+      <tr class="table__item-row table__row_without_pointer">
         <td class="table__item"><%= job_position.title %></td>
         <td class="table__item">
           <%= job_position.status == 'active' ? 'Действующая' : 'Архивная' %>
         </td>
-        <td class="table__item">
+        <td class="table__item table__item-action">
           <%= link_to "Редактировать", edit_admin_job_position_path(job_position)%>&nbsp;|&nbsp;
           <%= link_to_if job_position.status == 'active',
             "Удалить", admin_job_position_path(job_position), :method => :delete, data: {:confirm => "Вы уверены, что хотите удалить должность '#{job_position.title}'?" }, :title => "Удалить #{job_position.title}" %>
