@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crm</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="page__main">
+        <%= render '/layouts/admin/header' %>
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= render '/layouts/footer' %>
+  </body>
+</html>
