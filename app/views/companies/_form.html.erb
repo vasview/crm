@@ -48,7 +48,7 @@
     </div>
     <div class="form__row">
       <label for="company_industry" class="form__label">Сфера деятельности : </label>
-      <%= collection_select(:company, :industry_id, Industry.all, :id, :title, { promp: true }, { class: 'form__input form__input-collection' }) %>
+      <%= collection_select(:company, :industry_id, Industry.status('active'), :id, :title, { promp: true }, { class: 'form__input form__input-collection' }) %>
     </div>
     <div class="form__row">
       <%= f.label :birthdate, 'День рождения компании :', class: 'form__label'%>

@@ -1,0 +1,12 @@
+<div class="section_title-block">
+  <h2 class="main__title">Список секторов экономики</h2>
+  <span class="section__link-add"><%= link_to "Добавить сектор экономики", new_admin_industry_path %></span>
+</div>
+<div class="job_position_form"></div>
+<div class="page__inner">
+  <div class="main__section">
+    <div class="job_position_list__block list__section">
+      <%= render partial: 'admin/industries/table' %>
+    </div>
+  </div>
+</div>
