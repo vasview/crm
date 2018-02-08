@@ -9,9 +9,9 @@ module Admin
     end
 
     def create
-      @job_position = JobPosition.create(job_position_params)
+      @job_position = JobPosition.new(job_position_params)
 
-      if @job_position
+      if @job_position.save
         redirect_to admin_job_positions_path, notice: "Должность успешно добавлена."
       else
         render :new
