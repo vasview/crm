@@ -9,9 +9,9 @@ module Admin
     end
 
     def create
-      @industry = Industry.create(industry_params)
+      @industry = Industry.new(industry_params)
 
-      if @industry
+      if @industry.save
         redirect_to admin_industries_path, notice: "Сектор экономики успешно добавлен."
       else
         render :new
