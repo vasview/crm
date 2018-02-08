@@ -1,0 +1,12 @@
+<div class="section_title-block">
+  <h2 class="main__title">Список предоставляемых услуг</h2>
+  <span class="section__link-add"><%= link_to "Добавить услугу", new_admin_service_path %></span>
+</div>
+<div class="service_form"></div>
+<div class="page__inner">
+  <div class="main__section">
+    <div class="service_list__block list__section center-list__section">
+      <%= render partial: 'admin/services/table' %>
+    </div>
+  </div>
+</div>

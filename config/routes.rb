@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :industries
     resources :users
     resources :job_positions
+    resources :services
   end
 
   resources :representatives do

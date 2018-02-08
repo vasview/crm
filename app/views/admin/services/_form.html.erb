@@ -1,0 +1,37 @@
+<div class="form__wrapper">
+  <%= form_for [:admin, @service], class: 'service__form' do |f| %>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :name, 'Название услуги :', class: 'form__label form__mandatory-field'%>
+        <%= f.text_field :name, class: 'form__input form__input-error-service_name'%>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :description, 'Описание предоставляемой услуги :', class: 'form__label form__mandatory-field'%>
+        <%= f.text_area :description, class: 'form__input form__input-error-service_description'%>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :cost, 'Цена услуги :', class: 'form__label form__mandatory-field'%>
+        <%= f.text_field :cost, class: 'form__input form__input-error-service_cost'%>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :committee_cost, 'Цена услуги для комитета :', class: 'form__label form__mandatory-field'%>
+        <%= f.text_field :committee_cost, class: 'form__input form__input-error-service_committee_cost'%>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="form-item">
+        <%= f.label :status, 'Статус услуги :', class: 'form__label form__mandatory-field'%>
+        <%= f.select :status, Service.statuses.keys %>
+      </div>
+    </div>
+    <div class="form__row">
+      <%= f.submit "Создать", class: 'button form__button' %>
+    </div>
+  <% end %>
+</div>

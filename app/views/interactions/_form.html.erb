@@ -28,7 +28,7 @@
     </div>
     <div class="form__row">
       <%= f.label "Вид услуги : ", class: 'form__label'%>
-      <%= collection_select(:interaction, :service_id, Service.all, :id, :name, { promp: true }, { class: 'form__input' }) %>
+      <%= collection_select(:interaction, :service_id, Service.active, :id, :name, { promp: true }, { class: 'form__input' }) %>
     </div>
     <div class="form__row">
       <label for="interaction_user" class="form__label">Ответственный сотрудник : </label>
