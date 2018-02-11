@@ -31,6 +31,7 @@ class MainController < ApplicationController
 
   def set_filter_period
     @filter_period = get_filtered_period(filter_params)
+    session[:filter_period] = @filter_period
   end
 
   def filter_params

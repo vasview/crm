@@ -106,6 +106,10 @@ class InteractionsController < ApplicationController
   end
 
   def set_filter_period
-    @filter_period = get_filtered_period(filter_params)
+    if params[:action] == 'one_company_interactions'
+      @filter_period = [DateTime.parse(session[:filter_period].first), DateTime.parse(session[:filter_period].last)]
+    else
+      @filter_period = get_filtered_period(filter_params)
+    end
   end
 end
